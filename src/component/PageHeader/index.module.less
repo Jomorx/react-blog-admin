@@ -1,0 +1,18 @@
+.container {
+position: relative;
+    .title{
+        font-weight: 600;
+        font-size: 16px;
+
+        &::before{
+            content: "";
+            width: 24px;
+            height: 16px;
+            border-left: 5px blue solid;
+            position: absolute;
+            left: -26px;
+            top: 5px;
+        }
+    }
+    margin-bottom: 20px;
+}

@@ -1,0 +1,61 @@
+.logo{
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.header{
+  padding: 0 !important; 
+  background-color: white !important;
+  display:flex;
+  flex-wrap:nowrap;
+  justify-content: space-between;
+  .headerLeft{
+    display: flex;
+    align-items: center;
+
+    svg{
+      width: 1.5em;
+      height: 1.5em;
+    }
+    .breadcrumb{
+      margin-left: 20px;
+      ol{
+        max-height: 44px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+
+        li{
+        max-height: 22px;
+        }
+      }
+    }
+  }
+  .headerRight{
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+    svg{
+      height: 1.5em;
+      width: 1.5em;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+  }
+
+}
+
+.activeBreadcrumb{
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  font-weight: 600;
+}
+.normalBreadcrumb{
+  color: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  font-weight: 600;
+}
+
