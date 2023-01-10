@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 export const useModal = (
   title: string,
+  tableId:string,
   flushTable: Function,
   insertDataApi: Function,
   editDataApi: Function,
@@ -37,7 +38,7 @@ export const useModal = (
     setModalInfo({
       title: `编辑${title}`,
       onCreate: async (value) => {
-        await editDataApi(value);
+        await editDataApi({...value,[tableId]:record[tableId]});
         flushTable();
         setVisible(false);
       },

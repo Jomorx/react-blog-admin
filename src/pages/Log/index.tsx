@@ -8,7 +8,7 @@ import useColumns from "./table.config";
 import { useModal, useTable } from "@/hooks";
 import { ILog } from "@/api/log";
 import { modalConfig } from "./modal.config";
-function index() {
+function Log() {
   const {
     flushTable,
     tableInfo,
@@ -19,6 +19,7 @@ function index() {
   } = useTable<ILog>(getLogListApi, deleteLogListApi);
   const { visible, modalInfo, addClick, setModalInfo, setVisible,editClick } = useModal(
     "日志",
+    "logId",
     flushTable,
     insertLogApi,
     editLogApi,
@@ -59,9 +60,9 @@ function index() {
           current={tableInfo.currentPage}
         />
       </div>
-      <ModalForm visible={visible} ModalInfo={modalInfo!}></ModalForm>
+      <ModalForm visible={visible} ModalInfo={modalInfo}></ModalForm>
     </>
   );
 }
 
-export default index;
+export default Log;

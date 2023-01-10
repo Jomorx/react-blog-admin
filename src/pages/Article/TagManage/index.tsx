@@ -1,41 +1,41 @@
-import React, { useState } from "react";
-import PageHeader from "@/component/PageHeader";
-import OperationButton from "@/component/OperationButton";
-import { Pagination, Table } from "antd";
-import { ITag } from "@/api/tag";
-import { ColumnsType } from "antd/lib/table";
+import React from "react"
+import PageHeader from "@/component/PageHeader"
+import { Pagination, Table } from "antd"
+import { ITag } from "@/api/tag"
 import {
   deleteTagListApi,
   editTagApi,
   getTagListApi,
-  insertTagApi,
-} from "@/api/tag/TagApi";
-import ButtonHeader from "@/component/ButtonHeader";
-import ModalForm from "@/component/ModalForm";
-import { ModalInfoType } from "@/component/ModalForm/types";
-import { formatTime } from "@/utils";
-import { useTable,useModal } from "@/hooks";
-import { modalConfig } from "./modal.config";
-import { tableConfig } from "./table.config";
+  insertTagApi
+} from "@/api/tag/TagApi"
+import ButtonHeader from "@/component/ButtonHeader"
+import ModalForm from "@/component/ModalForm"
+import { useTable, useModal } from "@/hooks"
+import { modalConfig } from "./modal.config"
+import { tableConfig } from "./table.config"
 
-function index() {
-
+function TagManage() {
   const {
     tableInfo,
     setTableInfo,
     flushTable,
     rowSelection,
     batchDelete,
-    onSearch,
-  } = useTable<ITag>(getTagListApi, deleteTagListApi);
-  const {addClick,visible,modalInfo,editClick} = useModal("标签",flushTable,insertTagApi,deleteTagListApi,modalConfig);
+    onSearch
+  } = useTable<ITag>(getTagListApi, deleteTagListApi)
+  const { addClick, visible, modalInfo, editClick } = useModal(
+    "标签",
+    "tagId",
+    flushTable,
+    insertTagApi,
+    editTagApi,
+    modalConfig
+  )
 
-
-  const columns = tableConfig(flushTable,editClick)
+  const columns = tableConfig(flushTable, editClick)
   columns.forEach((item) => {
-    item.align = "center";
-  });
-
+    item.align = "center"
+  })
 
   return (
     <>
@@ -64,14 +64,14 @@ function index() {
           showTotal={(total) => `Total ${total} items`}
           onChange={(page, pageSize) => {
             setTableInfo((e) => {
-              return { ...e, pageSize, currentPage: page };
-            });
+              return { ...e, pageSize, currentPage: page }
+            })
           }}
         />
       </div>
       <ModalForm visible={visible} ModalInfo={modalInfo!}></ModalForm>
     </>
-  );
+  )
 }
 
-export default index;
+export default TagManage

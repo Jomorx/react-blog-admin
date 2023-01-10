@@ -13,7 +13,7 @@ import {
 import { useTable,useModal } from "@/hooks";
 import { modalConfig } from "./modal.config";
 import { tableConfig } from "./table.config";
-function index() {
+function CategoryManage() {
   const {
     tableInfo,
     setTableInfo,
@@ -23,7 +23,7 @@ function index() {
     onSearch,
   } = useTable<ICategory>(getCategoryListApi, deleteCategoryListApi);
   const {visible,modalInfo,addClick,
-  editClick} = useModal("分类",flushTable,insertCategoryApi,editCategoryApi,modalConfig)
+  editClick} = useModal("分类","categoryId",flushTable,insertCategoryApi,editCategoryApi,modalConfig)
 
 
   const columns = tableConfig(flushTable,editClick)
@@ -68,4 +68,4 @@ function index() {
   );
 }
 
-export default index;
+export default CategoryManage;
