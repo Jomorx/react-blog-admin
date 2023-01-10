@@ -1,7 +1,7 @@
-import request from "@/config";
-import { ReturnType } from "./types";
+import request from "@/config"
+import { ReturnType } from "./types"
 export const LoginApi = (
   account: string,
   password: string
 ): Promise<ReturnType<{ token: string }>> =>
-  request.post("/login", { account, password });
+  request.post("/login", { account, password })

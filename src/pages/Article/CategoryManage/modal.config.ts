@@ -1,6 +1,6 @@
-import { ModalInfoType } from "@/component/ModalForm/types";
+import { ModalInfoType } from "@/component/ModalForm/types"
 
-export const modalConfig:ModalInfoType["formItem"] = [
+export const modalConfig: ModalInfoType["formItem"] = [
   {
     name: "categoryName",
     label: "分类名称",
@@ -8,9 +8,9 @@ export const modalConfig:ModalInfoType["formItem"] = [
     rules: [
       {
         required: true,
-        message: "请输入分类名",
-      },
-    ],
+        message: "请输入分类名"
+      }
+    ]
   },
   {
     name: "categoryDescription",
@@ -19,9 +19,9 @@ export const modalConfig:ModalInfoType["formItem"] = [
     rules: [
       {
         required: true,
-        message: "请输入分类描述",
-      },
-    ],
+        message: "请输入分类描述"
+      }
+    ]
   },
   {
     name: "categoryCover",
@@ -30,15 +30,15 @@ export const modalConfig:ModalInfoType["formItem"] = [
     rules: [
       {
         required: true,
-        message: "请上传分类图片",
-      },
+        message: "请上传分类图片"
+      }
     ],
     valuePropName: "src",
     getValueFromEvent: (e: any) => {
-      console.log("Upload event:", e.file.status);
+      console.log("Upload event:", e.file.status)
       if (e.file.status === "done") {
-        return e?.file.response[0].src;
+        return e?.file.response[0].src
       }
-    },
-  },
+    }
+  }
 ]

@@ -1,18 +1,18 @@
-import React from "react";
-import PageHeader from "@/component/PageHeader";
-import { Pagination, Table } from "antd";
-import ButtonHeader from "@/component/ButtonHeader";
-import ModalForm from "@/component/ModalForm";
+import React from "react"
+import PageHeader from "@/component/PageHeader"
+import { Pagination, Table } from "antd"
+import ButtonHeader from "@/component/ButtonHeader"
+import ModalForm from "@/component/ModalForm"
 import {
   deleteCategoryListApi,
   editCategoryApi,
   getCategoryListApi,
   insertCategoryApi,
   ICategory
-} from "@/api/category";
-import { useTable,useModal } from "@/hooks";
-import { modalConfig } from "./modal.config";
-import { tableConfig } from "./table.config";
+} from "@/api/category"
+import { useTable, useModal } from "@/hooks"
+import { modalConfig } from "./modal.config"
+import { tableConfig } from "./table.config"
 function CategoryManage() {
   const {
     tableInfo,
@@ -20,16 +20,21 @@ function CategoryManage() {
     flushTable,
     rowSelection,
     batchDelete,
-    onSearch,
-  } = useTable<ICategory>(getCategoryListApi, deleteCategoryListApi);
-  const {visible,modalInfo,addClick,
-  editClick} = useModal("分类","categoryId",flushTable,insertCategoryApi,editCategoryApi,modalConfig)
+    onSearch
+  } = useTable<ICategory>(getCategoryListApi, deleteCategoryListApi)
+  const { visible, modalInfo, addClick, editClick } = useModal(
+    "分类",
+    "categoryId",
+    flushTable,
+    insertCategoryApi,
+    editCategoryApi,
+    modalConfig
+  )
 
-
-  const columns = tableConfig(flushTable,editClick)
+  const columns = tableConfig(flushTable, editClick)
   columns.forEach((item) => {
-    item.align = "center";
-  });
+    item.align = "center"
+  })
 
   return (
     <>
@@ -57,15 +62,15 @@ function CategoryManage() {
           showTotal={(total) => `Total ${total} items`}
           onChange={(currentPage, pageSize) => {
             setTableInfo((e) => {
-              return { ...e, pageSize, currentPage };
-            });
+              return { ...e, pageSize, currentPage }
+            })
           }}
           current={tableInfo.currentPage}
         />
       </div>
       <ModalForm visible={visible} ModalInfo={modalInfo!}></ModalForm>
     </>
-  );
+  )
 }
 
-export default CategoryManage;
+export default CategoryManage

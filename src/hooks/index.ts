@@ -1,3 +1,3 @@
-export * from "./useStore";
-export * from "./useTable";
-export * from "./useModal";
+export * from "./useStore"
+export * from "./useTable"
+export * from "./useModal"

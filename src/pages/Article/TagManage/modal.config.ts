@@ -1,6 +1,6 @@
-import { ModalInfoType } from "@/component/ModalForm/types";
+import { ModalInfoType } from "@/component/ModalForm/types"
 
-export const modalConfig:ModalInfoType["formItem"] = [
+export const modalConfig: ModalInfoType["formItem"] = [
   {
     name: "tagName",
     label: "标签名称",
@@ -8,8 +8,8 @@ export const modalConfig:ModalInfoType["formItem"] = [
     rules: [
       {
         required: true,
-        message: "请输入标签名",
-      },
-    ],
-  },
+        message: "请输入标签名"
+      }
+    ]
+  }
 ]

@@ -1,6 +1,5 @@
 export interface ILog {
-  logId: number;
-  logContent:string
-  createdAt:Date
-  
+  logId: number
+  logContent: string
+  createdAt: Date
 }

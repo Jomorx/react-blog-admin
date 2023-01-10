@@ -1,13 +1,13 @@
-import { RouteItem } from "@/router/types";
-import moment from "moment";
-import MenuItem from "_antd@4.21.6@antd/lib/menu/MenuItem";
+import { RouteItem } from "@/router/types"
+import moment from "moment"
+import MenuItem from "_antd@4.21.6@antd/lib/menu/MenuItem"
 
 //全屏
 export const fullScreen = () => {
-  const el = document.documentElement;
-  const rfs = el.requestFullscreen;
+  const el = document.documentElement
+  const rfs = el.requestFullscreen
   if (typeof rfs != "undefined" && rfs) {
-    rfs.call(el);
+    rfs.call(el)
   }
   // else if (typeof (window as any).ActiveXObject != "undefined") {
   //   // for Internet Explorer
@@ -16,13 +16,13 @@ export const fullScreen = () => {
   //     wscript.SendKeys("{F11}");
   //   }
   // }
-};
+}
 
 export const formatTime = (time: Date) => {
-  if (!time) return "";
-  return moment(time).format("YYYY-MM-DD");
-};
+  if (!time) return ""
+  return moment(time).format("YYYY-MM-DD")
+}
 
-export const getToken = (): string => localStorage.getItem("token")!;
-export const setToken = (token: string) => localStorage.setItem("token", token);
-export const removeToken = () => localStorage.removeItem("token");
+export const getToken = (): string => localStorage.getItem("token")!
+export const setToken = (token: string) => localStorage.setItem("token", token)
+export const removeToken = () => localStorage.removeItem("token")

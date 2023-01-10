@@ -1,2 +1,2 @@
-export * from './FriendChainApi'
-export * from './types'
+export * from "./FriendChainApi"
+export * from "./types"

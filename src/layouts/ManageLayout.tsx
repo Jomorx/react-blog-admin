@@ -1,22 +1,22 @@
-import { Layout, Avatar, Popover } from "antd";
-import Menu from "@/component/Menu";
-import Breadcrumb from "@/component/Breadcrumb";
+import { Layout, Avatar, Popover } from "antd"
+import Menu from "@/component/Menu"
+import Breadcrumb from "@/component/Breadcrumb"
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  ExpandOutlined,
-} from "@ant-design/icons";
-import React, { useEffect, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import style from "./index.module.less";
-const { Header, Sider, Content } = Layout;
-import { fullScreen, getToken, removeToken } from "@/utils";
-import { Suspense } from "react";
-import router from "@/router/routes";
+  ExpandOutlined
+} from "@ant-design/icons"
+import React, { useEffect, useState } from "react"
+import { Outlet, useLocation, useNavigate } from "react-router-dom"
+import style from "./index.module.less"
+const { Header, Sider, Content } = Layout
+import { fullScreen, getToken, removeToken } from "@/utils"
+import { Suspense } from "react"
+import router from "@/router/routes"
 
 const App: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false)
+  const navigate = useNavigate()
   //没有token重定向到登录
   // useEffect(() => {
   //   getToken() || navigate("/login");
@@ -27,7 +27,7 @@ const App: React.FC = () => {
         style={{
           position: "relative",
           width: collapsed ? "80px" : "200px",
-          transition: "all 0.2s",
+          transition: "all 0.2s"
         }}
       >
         <Sider
@@ -46,7 +46,7 @@ const App: React.FC = () => {
         className="site-layout"
         style={{
           overflowY: "auto",
-          minHeight: "100vh",
+          minHeight: "100vh"
         }}
       >
         <Header className={"site-layout-background" + " " + style.header}>
@@ -57,8 +57,8 @@ const App: React.FC = () => {
                 className: "trigger",
                 onClick: () => setCollapsed(!collapsed),
                 style: {
-                  marginLeft: 30,
-                },
+                  marginLeft: 30
+                }
               }
             )}
             <Breadcrumb></Breadcrumb>
@@ -66,15 +66,16 @@ const App: React.FC = () => {
           <div className={style.headerRight}>
             <ExpandOutlined
               onClick={() => {
-                fullScreen();
+                fullScreen()
               }}
             />
             <Popover
               content={
-                <div style={{cursor:'pointer'}}
+                <div
+                  style={{ cursor: "pointer" }}
                   onClick={(e) => {
-                    removeToken();
-                    navigate("/login");
+                    removeToken()
+                    navigate("/login")
                   }}
                 >
                   退出登录
@@ -92,7 +93,7 @@ const App: React.FC = () => {
             margin: "24px 16px",
             padding: 24,
             minHeight: 280,
-            backgroundColor: "white",
+            backgroundColor: "white"
           }}
         >
           <Suspense fallback={"加载中"}>
@@ -101,7 +102,7 @@ const App: React.FC = () => {
         </Content>
       </Layout>
     </Layout>
-  );
-};
+  )
+}
 
-export default App;
+export default App

@@ -3,14 +3,14 @@ import {
   getArticleListApi,
   switchIsTopApi,
   IArticle
-} from "@/api/article";
-import OperationButton from "@/component/OperationButton";
-import { Button, Table, Switch, Tag, Pagination } from "antd";
-import { ColumnsType } from "antd/lib/table";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import PageHeader from "../../../component/PageHeader";
-import { TableInfo } from "./types";
+} from "@/api/article"
+import OperationButton from "@/component/OperationButton"
+import { Button, Table, Switch, Tag, Pagination } from "antd"
+import { ColumnsType } from "antd/lib/table"
+import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import PageHeader from "../../../component/PageHeader"
+import { TableInfo } from "./types"
 
 function index() {
   const columns: ColumnsType<IArticle> = [
@@ -19,16 +19,16 @@ function index() {
       dataIndex: "articleCover",
       render: (text) => (
         <img src={text} style={{ width: "50px", height: "50px" }} />
-      ),
+      )
     },
     {
       title: "文章标题",
-      dataIndex: "articleTitle",
+      dataIndex: "articleTitle"
     },
     {
       title: "分类",
       dataIndex: "category",
-      render:(category)=>{
+      render: (category) => {
         return <span>{category.categoryName}</span>
       }
     },
@@ -41,13 +41,13 @@ function index() {
             <Tag key={item.tagId} color={"#2db7f5"}>
               {item.tagName}
             </Tag>
-          );
-        });
-      },
+          )
+        })
+      }
     },
     {
       title: "阅读量",
-      dataIndex: "viewCount",
+      dataIndex: "viewCount"
     },
     {
       title: "置顶",
@@ -57,11 +57,11 @@ function index() {
           <Switch
             defaultChecked={!!text}
             onClick={async () => {
-              await switchIsTopApi(record.articleId as number, text);
+              await switchIsTopApi(record.articleId as number, text)
             }}
           ></Switch>
-        );
-      },
+        )
+      }
     },
     {
       title: "操作",
@@ -71,60 +71,60 @@ function index() {
           <>
             <OperationButton
               clickEdit={() => {
-                navigate(`/article/article-publish/${record.articleId}`,{})
+                navigate(`/article/article-publish/${record.articleId}`, {})
               }}
-              clickDelete={async() => {
-                await deleteArticleListApi([record.articleId] as number[]);
+              clickDelete={async () => {
+                await deleteArticleListApi([record.articleId] as number[])
                 flushTable()
               }}
             />
           </>
-        );
+        )
       },
-      width: "250px",
-    },
-  ];
+      width: "250px"
+    }
+  ]
   //元素居中
   columns.forEach((item) => {
-    item.align = "center";
-  });
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+    item.align = "center"
+  })
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
   const [tableInfo, setTableInfo] = useState<TableInfo>({
     currentPage: 1,
     pageSize: 10,
     data: [],
     count: 0,
-    searchText: "",
-  });
+    searchText: ""
+  })
   const navigate = useNavigate()
   const deleteSelect = async () => {
-    setLoading(true);
-    await deleteArticleListApi(selectedRowKeys as number[]);
-    flushTable();
-    setLoading(false);
-  };
+    setLoading(true)
+    await deleteArticleListApi(selectedRowKeys as number[])
+    flushTable()
+    setLoading(false)
+  }
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
+    setSelectedRowKeys(newSelectedRowKeys)
+  }
   const flushTable = async () => {
     const { data } = await getArticleListApi(
       tableInfo.currentPage,
       tableInfo.pageSize,
       tableInfo.searchText
-    );
-    setTableInfo({ ...tableInfo, ...{ count: data.count, data: data.rows } });
-  };
+    )
+    setTableInfo({ ...tableInfo, ...{ count: data.count, data: data.rows } })
+  }
   const rowSelection = {
     selectedRowKeys,
-    onChange: onSelectChange,
-  };
-  const hasSelected = selectedRowKeys.length > 0;
+    onChange: onSelectChange
+  }
+  const hasSelected = selectedRowKeys.length > 0
   //每次更新时刷新页面
   useEffect(() => {
-    flushTable();
-  }, [tableInfo.pageSize, tableInfo.currentPage]);
+    flushTable()
+  }, [tableInfo.pageSize, tableInfo.currentPage])
 
   return (
     <>
@@ -145,7 +145,7 @@ function index() {
         </span>
       </div>
       <Table
-      scroll={{ x: 1100 }}
+        scroll={{ x: 1100 }}
         bordered
         rowKey="articleId"
         rowSelection={rowSelection}
@@ -163,12 +163,12 @@ function index() {
           // defaultCurrent={1}
           current={tableInfo.currentPage}
           onChange={(page, pageSize) => {
-            setTableInfo({ ...tableInfo, pageSize, currentPage: page });
+            setTableInfo({ ...tableInfo, pageSize, currentPage: page })
           }}
         />
       </div>
     </>
-  );
+  )
 }
 
-export default index;
+export default index

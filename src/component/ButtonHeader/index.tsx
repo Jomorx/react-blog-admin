@@ -1,34 +1,34 @@
-import { Button } from "antd";
-import Search from "antd/lib/input/Search";
-import React, { useState } from "react";
+import { Button } from "antd"
+import Search from "antd/lib/input/Search"
+import React, { useState } from "react"
 interface IProps {
-  batchDelete: () => void;
-  newAdd: () => void;
-  placeHolder: string;
-  onSearch: (value: string, event: any) => void;
+  batchDelete: () => void
+  newAdd: () => void
+  placeHolder: string
+  onSearch: (value: string, event: any) => void
 }
 const index: React.FC<IProps> = ({
   batchDelete,
   newAdd,
   placeHolder,
-  onSearch,
+  onSearch
 }) => {
   const _batchDelete = () => {
-    batchDelete();
-  };
+    batchDelete()
+  }
   const _newAdd = () => {
-    newAdd();
-  };
+    newAdd()
+  }
   const _onSearch = (value: string, event: any) => {
-    onSearch(value, event);
-  };
+    onSearch(value, event)
+  }
 
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "space-between",
-        marginBottom: "20px",
+        marginBottom: "20px"
       }}
     >
       <div>
@@ -43,7 +43,7 @@ const index: React.FC<IProps> = ({
         <Button
           type="primary"
           onClick={(e) => {
-            _newAdd();
+            _newAdd()
           }}
         >
           新增
@@ -54,12 +54,12 @@ const index: React.FC<IProps> = ({
         placeholder={placeHolder}
         enterButton="搜索"
         onSearch={(value, event) => {
-          _onSearch(value, event);
+          _onSearch(value, event)
         }}
         loading={false}
       />
     </div>
-  );
-};
+  )
+}
 
-export default index;
+export default index

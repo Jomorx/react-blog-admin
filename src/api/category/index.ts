@@ -1,2 +1,2 @@
-export * from './CategoryApi'
-export * from './types'
+export * from "./CategoryApi"
+export * from "./types"

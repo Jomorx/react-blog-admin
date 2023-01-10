@@ -1,35 +1,32 @@
-import { Button, Form, Input, Modal, Radio, Switch } from "antd";
-import React, { useEffect, useState } from "react";
-import UploadImg from "../UploadImg";
-import { FormItem, ModalInfoType } from "./types";
+import { Button, Form, Input, Modal, Radio, Switch } from "antd"
+import React, { useEffect, useState } from "react"
+import UploadImg from "../UploadImg"
+import { FormItem, ModalInfoType } from "./types"
 interface IProps {
-  visible: boolean;
-  ModalInfo: ModalInfoType;
+  visible: boolean
+  ModalInfo: ModalInfoType
 }
 const switchRender = (type: string, item: FormItem, form: any) => {
   switch (type) {
     case "input": {
-      return <Input></Input>;
+      return <Input></Input>
     }
     case "textarea": {
-      return <Input type="textarea"></Input>;
+      return <Input type="textarea"></Input>
     }
     case "upload": {
-      return <UploadImg item={item} form={form}/>;
+      return <UploadImg item={item} form={form} />
     }
     case "ButtonWithPopover": {
-      return item.popoverItem!(item, form);
+      return item.popoverItem!(item, form)
     }
     case "switch": {
-      return (
-        <Switch
-        ></Switch>
-      );
+      return <Switch></Switch>
     }
   }
-};
+}
 const CollectionCreateForm: React.FC<IProps> = ({ visible, ModalInfo }) => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm()
   return (
     <Modal
       destroyOnClose={true}
@@ -42,12 +39,12 @@ const CollectionCreateForm: React.FC<IProps> = ({ visible, ModalInfo }) => {
         form
           .validateFields()
           .then(async (values) => {
-            await ModalInfo.onCreate(values);
-            form.resetFields();
+            await ModalInfo.onCreate(values)
+            form.resetFields()
           })
           .catch((info) => {
-            console.log("Validate Failed:", info);
-          });
+            console.log("Validate Failed:", info)
+          })
       }}
     >
       <Form
@@ -55,7 +52,6 @@ const CollectionCreateForm: React.FC<IProps> = ({ visible, ModalInfo }) => {
         form={form}
         layout="horizontal"
         name="form_in_modal"
-
       >
         {ModalInfo.formItem.map((item: FormItem) => {
           return (
@@ -70,11 +66,10 @@ const CollectionCreateForm: React.FC<IProps> = ({ visible, ModalInfo }) => {
             >
               {switchRender(item.type, item, form)}
             </Form.Item>
-          );
+          )
         })}
-
       </Form>
     </Modal>
-  );
-};
-export default CollectionCreateForm;
+  )
+}
+export default CollectionCreateForm

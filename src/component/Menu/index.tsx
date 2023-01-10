@@ -1,26 +1,26 @@
-import router from "@/router/routes";
-import { RouteItem } from "@/router/types";
-import { Menu } from "antd";
-import MenuItem from "antd/lib/menu/MenuItem";
-import SubMenu from "antd/lib/menu/SubMenu";
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-type IProps={
-  collapsed:boolean
+import router from "@/router/routes"
+import { RouteItem } from "@/router/types"
+import { Menu } from "antd"
+import MenuItem from "antd/lib/menu/MenuItem"
+import SubMenu from "antd/lib/menu/SubMenu"
+import React, { useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
+type IProps = {
+  collapsed: boolean
 }
-const index:React.FC<IProps>=({collapsed})=> {
-  const navigate = useNavigate();
-  const location = useLocation();
+const index: React.FC<IProps> = ({ collapsed }) => {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [openKey, setOpenKey] = useState<string[]>([
-    "/" + location.pathname.split("/")[1],
-  ]);
+    "/" + location.pathname.split("/")[1]
+  ])
   useEffect(() => {
     if (collapsed) {
-      setOpenKey([]);
+      setOpenKey([])
     } else {
-      setOpenKey(["/" + location.pathname.split("/")[1]]);
+      setOpenKey(["/" + location.pathname.split("/")[1]])
     }
-  }, [collapsed]);
+  }, [collapsed])
   const generate = (route: any) => {
     return route.children!.map((r: RouteItem) => {
       if (r.children) {
@@ -33,13 +33,13 @@ const index:React.FC<IProps>=({collapsed})=> {
               if (openKey[0] === r.key) {
                 setOpenKey([])
               } else {
-                setOpenKey([r.key!]);
+                setOpenKey([r.key!])
               }
             }}
           >
             {r.children && generate(r)}
           </SubMenu>
-        );
+        )
       } else if (r.label !== undefined) {
         return (
           <MenuItem
@@ -47,16 +47,16 @@ const index:React.FC<IProps>=({collapsed})=> {
             key={r.key}
             title={r.label}
             onClick={(e) => {
-              navigate(r.key!);
-              if(collapsed) setOpenKey([])
+              navigate(r.key!)
+              if (collapsed) setOpenKey([])
             }}
           >
             {r.label}
           </MenuItem>
-        );
+        )
       }
-    });
-  };
+    })
+  }
   return (
     <>
       <Menu
@@ -70,7 +70,7 @@ const index:React.FC<IProps>=({collapsed})=> {
         {generate(router[0])}
       </Menu>
     </>
-  );
+  )
 }
 
-export default index;
+export default index

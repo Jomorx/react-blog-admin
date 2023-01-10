@@ -1,45 +1,47 @@
-import React, { useEffect, useState } from "react";
-import PageHeader from "@/component/PageHeader";
-import OperationButton from "@/component/OperationButton";
-import { Pagination, Table } from "antd";
-import { TableInfo } from "./types";
-import { ColumnsType } from "antd/lib/table";
-import ButtonHeader from "@/component/ButtonHeader";
-import ModalForm from "@/component/ModalForm";
-import { ModalInfoType } from "@/component/ModalForm/types";
-import { formatTime } from "@/utils";
+import React, { useEffect, useState } from "react"
+import PageHeader from "@/component/PageHeader"
+import OperationButton from "@/component/OperationButton"
+import { Pagination, Table } from "antd"
+import { TableInfo } from "./types"
+import { ColumnsType } from "antd/lib/table"
+import ButtonHeader from "@/component/ButtonHeader"
+import ModalForm from "@/component/ModalForm"
+import { ModalInfoType } from "@/component/ModalForm/types"
+import { formatTime } from "@/utils"
 import {
   IFriendChain,
   deleteFriendChainListApi,
   editFriendChainApi,
   getFriendChainListApi,
-  insertFriendChainApi,
-} from "@/api/friendChain";
-import { useTable } from "@/hooks";
+  insertFriendChainApi
+} from "@/api/friendChain"
+import { useTable } from "@/hooks"
 function index() {
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const {tableInfo,setTableInfo,flushTable} = useTable<IFriendChain>(getFriendChainListApi);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+  const { tableInfo, setTableInfo, flushTable } = useTable<IFriendChain>(
+    getFriendChainListApi
+  )
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
+    setSelectedRowKeys(newSelectedRowKeys)
+  }
   const [modalInfo, setModalInfo] = useState<ModalInfoType>({
     title: "编辑标签",
     onCreate: () => {},
     onCancel: () => {},
-    formItem: [],
-  });
-  const [visible, setVisible] = useState<boolean>(false);
+    formItem: []
+  })
+  const [visible, setVisible] = useState<boolean>(false)
   const rowSelection = {
     selectedRowKeys,
-    onChange: onSelectChange,
-  };
+    onChange: onSelectChange
+  }
   const columns: ColumnsType<IFriendChain> = [
     {
       title: "友链名",
       dataIndex: "friendChainName",
       render: (categoryName) => {
-        return <span style={{ fontWeight: "600" }}>{categoryName}</span>;
-      },
+        return <span style={{ fontWeight: "600" }}>{categoryName}</span>
+      }
     },
     {
       title: "友链图片",
@@ -52,22 +54,22 @@ function index() {
               src={categoryCover}
             ></img>
           </span>
-        );
-      },
+        )
+      }
     },
     {
       title: "友链描述",
       dataIndex: "friendChainDescription",
       render: (categoryDescription) => {
-        return <span style={{ fontWeight: "600" }}>{categoryDescription}</span>;
-      },
+        return <span style={{ fontWeight: "600" }}>{categoryDescription}</span>
+      }
     },
     {
       title: "友链链接",
       dataIndex: "friendChainLink",
       render: (articleCount) => {
-        return <span style={{ fontWeight: "600" }}>{articleCount}</span>;
-      },
+        return <span style={{ fontWeight: "600" }}>{articleCount}</span>
+      }
     },
     {
       title: "创建时间",
@@ -75,8 +77,8 @@ function index() {
       render: (createdAt) => {
         return (
           <span style={{ fontWeight: "600" }}>{formatTime(createdAt)}</span>
-        );
-      },
+        )
+      }
     },
     {
       title: "操作",
@@ -91,13 +93,13 @@ function index() {
                   onCreate: async (value) => {
                     await editFriendChainApi({
                       ...value,
-                      friendChainId: record.friendChainId,
-                    });
-                    flushTable();
-                    setVisible(false);
+                      friendChainId: record.friendChainId
+                    })
+                    flushTable()
+                    setVisible(false)
                   },
                   onCancel: () => {
-                    setVisible(false);
+                    setVisible(false)
                   },
                   formItem: [
                     {
@@ -108,9 +110,9 @@ function index() {
                       rules: [
                         {
                           required: true,
-                          message: "请输入友链名",
-                        },
-                      ],
+                          message: "请输入友链名"
+                        }
+                      ]
                     },
                     {
                       name: "friendChainDescription",
@@ -120,9 +122,9 @@ function index() {
                       rules: [
                         {
                           required: true,
-                          message: "请输入友链描述",
-                        },
-                      ],
+                          message: "请输入友链描述"
+                        }
+                      ]
                     },
                     {
                       name: "friendChainLink",
@@ -132,9 +134,9 @@ function index() {
                       rules: [
                         {
                           required: true,
-                          message: "请输入友链链接",
-                        },
-                      ],
+                          message: "请输入友链链接"
+                        }
+                      ]
                     },
                     {
                       name: "friendChainAvatar",
@@ -144,53 +146,51 @@ function index() {
                       rules: [
                         {
                           required: true,
-                          message: "请上传友链图片",
-                        },
+                          message: "请上传友链图片"
+                        }
                       ],
                       valuePropName: "src",
                       getValueFromEvent: (e: any) => {
-                        console.log("Upload event:", e.file.status);
+                        console.log("Upload event:", e.file.status)
                         if (e.file.status === "done") {
-                          return e?.file.response[0].src;
+                          return e?.file.response[0].src
                         }
-                      },
-                    },
-                  ],
-                });
-                setVisible(true);
+                      }
+                    }
+                  ]
+                })
+                setVisible(true)
               }}
               clickDelete={async () => {
-                await deleteFriendChainListApi([
-                  record.friendChainId as number,
-                ]);
-                flushTable();
+                await deleteFriendChainListApi([record.friendChainId as number])
+                flushTable()
               }}
             />
           </>
-        );
+        )
       },
-      width: "250px",
-    },
-  ];
+      width: "250px"
+    }
+  ]
 
   columns.forEach((item) => {
-    item.align = "center";
-  });
+    item.align = "center"
+  })
 
   const batchDelete = async () => {
-    const res = await deleteFriendChainListApi(selectedRowKeys as number[]);
+    const res = await deleteFriendChainListApi(selectedRowKeys as number[])
     flushTable()
-  };
+  }
   const newAdd = () => {
     setModalInfo({
       title: "新增友链",
       onCreate: async (value) => {
-        await insertFriendChainApi(value);
-        flushTable();
-        setVisible(false);
+        await insertFriendChainApi(value)
+        flushTable()
+        setVisible(false)
       },
       onCancel: () => {
-        setVisible(false);
+        setVisible(false)
       },
       formItem: [
         {
@@ -200,9 +200,9 @@ function index() {
           rules: [
             {
               required: true,
-              message: "请输入友链名称",
-            },
-          ],
+              message: "请输入友链名称"
+            }
+          ]
         },
         {
           name: "friendChainDescription",
@@ -211,9 +211,9 @@ function index() {
           rules: [
             {
               required: true,
-              message: "请输入友链描述",
-            },
-          ],
+              message: "请输入友链描述"
+            }
+          ]
         },
         {
           name: "friendChainLink",
@@ -222,9 +222,9 @@ function index() {
           rules: [
             {
               required: true,
-              message: "请输入友链链接",
-            },
-          ],
+              message: "请输入友链链接"
+            }
+          ]
         },
         {
           name: "friendChainAvatar",
@@ -233,24 +233,24 @@ function index() {
           rules: [
             {
               required: true,
-              message: "请上传友链图片",
-            },
+              message: "请上传友链图片"
+            }
           ],
           valuePropName: "src",
           getValueFromEvent: (e: any) => {
-            console.log("Upload event:", e.file.status);
+            console.log("Upload event:", e.file.status)
             if (e.file.status === "done") {
-              return e?.file.response[0].src;
+              return e?.file.response[0].src
             }
-          },
-        },
-      ],
-    });
-    setVisible(true);
-  };
+          }
+        }
+      ]
+    })
+    setVisible(true)
+  }
   const onSearch = (value: string, event: any) => {
-    setTableInfo({ ...tableInfo, ...{ searchText: value, currentPage: 1 } });
-  };
+    setTableInfo({ ...tableInfo, ...{ searchText: value, currentPage: 1 } })
+  }
   return (
     <>
       <PageHeader title="友链管理" />
@@ -276,10 +276,10 @@ function index() {
           showQuickJumper
           showTotal={(total) => `Total ${total} items`}
           onChange={(page, pageSize) => {
-            console.log(page);
+            console.log(page)
             setTableInfo((e) => {
-              return { ...e, pageSize, currentPage: page };
-            });
+              return { ...e, pageSize, currentPage: page }
+            })
           }}
           // defaultCurrent={tableInfo.currentPage}
           current={tableInfo.currentPage}
@@ -287,7 +287,7 @@ function index() {
       </div>
       <ModalForm visible={visible} ModalInfo={modalInfo!}></ModalForm>
     </>
-  );
+  )
 }
 
-export default index;
+export default index

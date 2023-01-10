@@ -7,8 +7,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "prettier": "prettier --write .",
-		"prepare": "husky install",
-		"commit": "git-cz"
+    "lint": "prettier --write .",
+    "prepare": "husky install",
+    "commit": "git-cz"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.0",

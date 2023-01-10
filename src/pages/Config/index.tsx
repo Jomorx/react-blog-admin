@@ -1,29 +1,29 @@
-import { useEffect, useState } from "react";
-import { Button, Input } from "antd";
-import MdEditor from "md-editor-rt";
-import PageHeader from "@/component/PageHeader";
-import style from "./index.module.less";
-import { useParams } from "react-router-dom";
-import { getConfigByIdApi, editConfigApi, IConfig } from "@/api/config";
+import { useEffect, useState } from "react"
+import { Button, Input } from "antd"
+import MdEditor from "md-editor-rt"
+import PageHeader from "@/component/PageHeader"
+import style from "./index.module.less"
+import { useParams } from "react-router-dom"
+import { getConfigByIdApi, editConfigApi, IConfig } from "@/api/config"
 function index() {
   const [initData, setInitData] = useState<IConfig>({
     configId: 0,
     configName: "",
-    configContent: "",
-  });
-  const param = useParams();
+    configContent: ""
+  })
+  const param = useParams()
   const publishConfig = () => {
-    editConfigApi(initData);
-  };
+    editConfigApi(initData)
+  }
   const init = async () => {
     if (JSON.stringify(param) !== "{}") {
-      const { data } = await getConfigByIdApi(Number(param.id));
+      const { data } = await getConfigByIdApi(Number(param.id))
       setInitData(data)
     }
-  };
+  }
   useEffect(() => {
-    init();
-  }, []);
+    init()
+  }, [])
   return (
     <>
       <PageHeader title="发布文章"></PageHeader>
@@ -37,7 +37,7 @@ function index() {
           maxLength={20}
           value={initData.configName}
           onChange={(e) => {
-            setInitData({...initData,configName:e.target.value})
+            setInitData({ ...initData, configName: e.target.value })
           }}
         />
         <Button size="large" danger className={style.button}>
@@ -49,15 +49,20 @@ function index() {
           danger
           className={style.button}
           onClick={() => {
-            publishConfig();
+            publishConfig()
           }}
         >
           发布文章
         </Button>
       </div>
-      <MdEditor modelValue={initData.configContent} onChange={configContent=>setInitData({...initData,configContent})} />
+      <MdEditor
+        modelValue={initData.configContent}
+        onChange={(configContent) =>
+          setInitData({ ...initData, configContent })
+        }
+      />
     </>
-  );
+  )
 }
 
-export default index;
+export default index

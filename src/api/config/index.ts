@@ -1,2 +1,2 @@
-export * from './ConfigApi'
-export * from './types'
+export * from "./ConfigApi"
+export * from "./types"

@@ -1,14 +1,13 @@
-
-import { deleteProjectListApi, getProjectListApi } from "@/api/ProjectApi";
-import OperationButton from "@/component/OperationButton";
-import { formatTime } from "@/utils";
-import { Button, Table, Pagination } from "antd";
-import { ColumnsType } from "antd/lib/table";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import PageHeader from "../../../component/PageHeader";
-import { TableInfo } from "./types";
-import { RowType } from "./types";
+import { deleteProjectListApi, getProjectListApi } from "@/api/ProjectApi"
+import OperationButton from "@/component/OperationButton"
+import { formatTime } from "@/utils"
+import { Button, Table, Pagination } from "antd"
+import { ColumnsType } from "antd/lib/table"
+import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import PageHeader from "../../../component/PageHeader"
+import { TableInfo } from "./types"
+import { RowType } from "./types"
 
 function index() {
   const columns: ColumnsType<RowType> = [
@@ -17,23 +16,21 @@ function index() {
       dataIndex: "projectCover",
       render: (text) => (
         <img src={text} style={{ width: "50px", height: "50px" }} />
-      ),
+      )
     },
     {
       title: "项目名称",
-      dataIndex: "projectName",
+      dataIndex: "projectName"
     },
     {
-      title:"项目链接",
-      dataIndex:"projectLink"
+      title: "项目链接",
+      dataIndex: "projectLink"
     },
 
     {
       title: "创建时间",
       dataIndex: "createdAt",
-      render:(time)=>(
-        <span>{formatTime(time)}</span>
-      )
+      render: (time) => <span>{formatTime(time)}</span>
     },
     {
       title: "操作",
@@ -43,60 +40,60 @@ function index() {
           <>
             <OperationButton
               clickEdit={() => {
-                navigate(`/project/project-publish/${record.projectId}`,{})
+                navigate(`/project/project-publish/${record.projectId}`, {})
               }}
-              clickDelete={async() => {
-                await deleteProjectListApi([record.projectId] as number[]);
+              clickDelete={async () => {
+                await deleteProjectListApi([record.projectId] as number[])
                 flushTable()
               }}
             />
           </>
-        );
+        )
       },
-      width: "250px",
-    },
-  ];
+      width: "250px"
+    }
+  ]
   //元素居中
   columns.forEach((item) => {
-    item.align = "center";
-  });
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+    item.align = "center"
+  })
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
   const [tableInfo, setTableInfo] = useState<TableInfo>({
     currentPage: 1,
     pageSize: 10,
     data: [],
     count: 0,
-    searchText: "",
-  });
+    searchText: ""
+  })
   const navigate = useNavigate()
   const deleteSelect = async () => {
-    setLoading(true);
-    await deleteProjectListApi(selectedRowKeys as number[]);
-    flushTable();
-    setLoading(false);
-  };
+    setLoading(true)
+    await deleteProjectListApi(selectedRowKeys as number[])
+    flushTable()
+    setLoading(false)
+  }
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
+    setSelectedRowKeys(newSelectedRowKeys)
+  }
   const flushTable = async () => {
     const { data } = await getProjectListApi(
       tableInfo.pageSize,
       tableInfo.currentPage,
       tableInfo.searchText
-    );
-    setTableInfo({ ...tableInfo, ...{ count: data.count, data: data.rows } });
-  };
+    )
+    setTableInfo({ ...tableInfo, ...{ count: data.count, data: data.rows } })
+  }
   const rowSelection = {
     selectedRowKeys,
-    onChange: onSelectChange,
-  };
-  const hasSelected = selectedRowKeys.length > 0;
+    onChange: onSelectChange
+  }
+  const hasSelected = selectedRowKeys.length > 0
   //每次更新时刷新页面
   useEffect(() => {
-    flushTable();
-  }, [tableInfo.pageSize, tableInfo.currentPage]);
+    flushTable()
+  }, [tableInfo.pageSize, tableInfo.currentPage])
 
   return (
     <>
@@ -117,7 +114,7 @@ function index() {
         </span>
       </div>
       <Table
-      scroll={{ x: 1100 }}
+        scroll={{ x: 1100 }}
         bordered
         rowKey="projectId"
         rowSelection={rowSelection}
@@ -134,12 +131,12 @@ function index() {
           showTotal={(total) => `Total ${total} items`}
           current={tableInfo.currentPage}
           onChange={(page, pageSize) => {
-            setTableInfo({ ...tableInfo, pageSize, currentPage: page });
+            setTableInfo({ ...tableInfo, pageSize, currentPage: page })
           }}
         />
       </div>
     </>
-  );
+  )
 }
 
-export default index;
+export default index

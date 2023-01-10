@@ -1,7 +1,7 @@
-import { deleteCategoryListApi, ICategory } from "@/api/category";
-import OperationButton from "@/component/OperationButton";
-import { formatTime } from "@/utils";
-import { ColumnsType } from "antd/lib/table";
+import { deleteCategoryListApi, ICategory } from "@/api/category"
+import OperationButton from "@/component/OperationButton"
+import { formatTime } from "@/utils"
+import { ColumnsType } from "antd/lib/table"
 export const tableConfig = (
   flushTable: Function,
   editClick: Function
@@ -11,8 +11,8 @@ export const tableConfig = (
       title: "分类名",
       dataIndex: "categoryName",
       render: (categoryName) => {
-        return <span style={{ fontWeight: "600" }}>{categoryName}</span>;
-      },
+        return <span style={{ fontWeight: "600" }}>{categoryName}</span>
+      }
     },
     {
       title: "分类图片",
@@ -25,22 +25,22 @@ export const tableConfig = (
               src={categoryCover}
             ></img>
           </span>
-        );
-      },
+        )
+      }
     },
     {
       title: "分类描述",
       dataIndex: "categoryDescription",
       render: (categoryDescription) => {
-        return <span style={{ fontWeight: "600" }}>{categoryDescription}</span>;
-      },
+        return <span style={{ fontWeight: "600" }}>{categoryDescription}</span>
+      }
     },
     {
       title: "文章数量",
       dataIndex: "articleCount",
       render: (articleCount) => {
-        return <span style={{ fontWeight: "600" }}>{articleCount}</span>;
-      },
+        return <span style={{ fontWeight: "600" }}>{articleCount}</span>
+      }
     },
     {
       title: "创建时间",
@@ -48,8 +48,8 @@ export const tableConfig = (
       render: (createdAt) => {
         return (
           <span style={{ fontWeight: "600" }}>{formatTime(createdAt)}</span>
-        );
-      },
+        )
+      }
     },
     {
       title: "操作",
@@ -59,17 +59,17 @@ export const tableConfig = (
           <>
             <OperationButton
               clickEdit={() => {
-                editClick(record);
+                editClick(record)
               }}
               clickDelete={async () => {
-                await deleteCategoryListApi([record.categoryId as number]);
-                flushTable();
+                await deleteCategoryListApi([record.categoryId as number])
+                flushTable()
               }}
             />
           </>
-        );
+        )
       },
-      width: "250px",
-    },
-  ];
-};
+      width: "250px"
+    }
+  ]
+}

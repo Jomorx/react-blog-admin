@@ -1,12 +1,12 @@
-import { getCategoryListApi } from "@/api/category/CategoryApi";
-import { FormItem } from "@/component/ModalForm/types";
-import { Button, Popover, Tag } from "antd";
-import React, { useEffect, useState } from "react";
-import { RowType } from "../../CategoryManage/types";
-import style from "./categoryContent.module.less";
+import { getCategoryListApi } from "@/api/category/CategoryApi"
+import { FormItem } from "@/component/ModalForm/types"
+import { Button, Popover, Tag } from "antd"
+import React, { useEffect, useState } from "react"
+import { RowType } from "../../CategoryManage/types"
+import style from "./categoryContent.module.less"
 const CategoryContent = (item: FormItem, form: any) => {
-  const [data, setData] = useState<RowType[]>();
-  const [value, setValue] = useState<RowType>();
+  const [data, setData] = useState<RowType[]>()
+  const [value, setValue] = useState<RowType>()
   const content = () => {
     return (
       <div style={{ width: "400px" }}>
@@ -16,29 +16,29 @@ const CategoryContent = (item: FormItem, form: any) => {
               className={style.categoryLi}
               key={item.categoryId}
               onClick={(e) => {
-                setValue(item);
+                setValue(item)
               }}
             >
               {item.categoryName}
             </li>
-          );
+          )
         })}
       </div>
-    );
-  };
+    )
+  }
   const init = async () => {
-    const res = await getCategoryListApi(10, 1, "");
-    setData(res.data.rows);
-  };
+    const res = await getCategoryListApi(10, 1, "")
+    setData(res.data.rows)
+  }
   useEffect(() => {
-    setValue(item.initialValue);
-  }, [item.initialValue]);
+    setValue(item.initialValue)
+  }, [item.initialValue])
   useEffect(() => {
-    form.setFieldsValue({ categoryId: value?.categoryId });
-  }, [value]);
+    form.setFieldsValue({ categoryId: value?.categoryId })
+  }, [value])
   useEffect(() => {
-    init();
-  }, []);
+    init()
+  }, [])
 
   return (
     <>
@@ -50,14 +50,14 @@ const CategoryContent = (item: FormItem, form: any) => {
         <Tag
           closable
           onClose={(e) => {
-            setValue(undefined);
+            setValue(undefined)
           }}
         >
           {value!.categoryName}
         </Tag>
       )}
     </>
-  );
-};
+  )
+}
 
-export default CategoryContent;
+export default CategoryContent

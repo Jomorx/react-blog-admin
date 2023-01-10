@@ -1,39 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { Button, Input } from "antd";
-import MdEditor from "md-editor-rt";
-import PageHeader from "../../../component/PageHeader";
-import style from "./index.module.less";
-import "md-editor-rt/lib/style.css";
-import ModalForm from "@/component/ModalForm";
-import { ModalInfoType } from "@/component/ModalForm/types";
-import { useParams } from "react-router-dom";
-import { getProjectByIdApi, updateProjectApi, uploadProjectApi } from "@/api/ProjectApi";
+import React, { useEffect, useState } from "react"
+import { Button, Input } from "antd"
+import MdEditor from "md-editor-rt"
+import PageHeader from "../../../component/PageHeader"
+import style from "./index.module.less"
+import "md-editor-rt/lib/style.css"
+import ModalForm from "@/component/ModalForm"
+import { ModalInfoType } from "@/component/ModalForm/types"
+import { useParams } from "react-router-dom"
+import {
+  getProjectByIdApi,
+  updateProjectApi,
+  uploadProjectApi
+} from "@/api/ProjectApi"
 function index() {
-  const [title, setTitle] = useState("hello");
-  const [text, setText] = useState("hello md-editor-rt!");
-  const [visible, setVisible] = useState<boolean>(false);
-  const [initValue, setInitValue] = useState<any>();
-  const param = useParams();
+  const [title, setTitle] = useState("hello")
+  const [text, setText] = useState("hello md-editor-rt!")
+  const [visible, setVisible] = useState<boolean>(false)
+  const [initValue, setInitValue] = useState<any>()
+  const param = useParams()
   const modalInfo: ModalInfoType = {
     onCreate: async (value) => {
-      if (JSON.stringify(param) === '{}') {
+      if (JSON.stringify(param) === "{}") {
         const res = await uploadProjectApi({
           ...value,
           projectName: title,
-          projectDescription: text,
-        });
+          projectDescription: text
+        })
       } else {
         await updateProjectApi({
           projectId: initValue?.projectId,
           ...value,
           projectName: title,
-          projectDescription: text,
-        });
+          projectDescription: text
+        })
       }
-      setVisible(false);
+      setVisible(false)
     },
     onCancel: () => {
-      setVisible(false);
+      setVisible(false)
     },
     formItem: [
       {
@@ -43,41 +47,40 @@ function index() {
         rules: [
           {
             required: true,
-            message: "请上传封面",
-          },
+            message: "请上传封面"
+          }
         ],
         valuePropName: "src",
         getValueFromEvent: (e: any) => {
-          console.log("Upload event:", e.file.status);
+          console.log("Upload event:", e.file.status)
           if (e.file.status === "done") {
-            return e?.file.response[0].src;
+            return e?.file.response[0].src
           }
         },
-        initialValue: initValue?.projectCover,
-      },
-    ],
-    title: "发布项目",
-  };
-  const publishArticle = () => {
-    setVisible(true);
-  };
-
-  useEffect(() => {
-      if (initValue !== undefined) {
-        setText(initValue.projectDescription);
-        setTitle(initValue.projectName);
+        initialValue: initValue?.projectCover
       }
-  }, [initValue]);
-  const init = async () => {
-    if(JSON.stringify(param) !== '{}'){
-      const res = await getProjectByIdApi(param.id);
-      setInitValue(res as any);
-    }
+    ],
+    title: "发布项目"
+  }
+  const publishArticle = () => {
+    setVisible(true)
+  }
 
-  };
   useEffect(() => {
-    init();
-  }, []);
+    if (initValue !== undefined) {
+      setText(initValue.projectDescription)
+      setTitle(initValue.projectName)
+    }
+  }, [initValue])
+  const init = async () => {
+    if (JSON.stringify(param) !== "{}") {
+      const res = await getProjectByIdApi(param.id)
+      setInitValue(res as any)
+    }
+  }
+  useEffect(() => {
+    init()
+  }, [])
   return (
     <>
       <PageHeader title="发布项目"></PageHeader>
@@ -91,7 +94,7 @@ function index() {
           maxLength={20}
           value={title}
           onChange={(e) => {
-            setTitle(e.target.value);
+            setTitle(e.target.value)
           }}
         />
         <Button size="large" danger className={style.button}>
@@ -103,7 +106,7 @@ function index() {
           danger
           className={style.button}
           onClick={() => {
-            publishArticle();
+            publishArticle()
           }}
         >
           发布项目
@@ -112,7 +115,7 @@ function index() {
       <MdEditor modelValue={text} onChange={setText} />
       <ModalForm visible={visible} ModalInfo={modalInfo}></ModalForm>
     </>
-  );
+  )
 }
 
-export default index;
+export default index
