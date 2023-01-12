@@ -1,21 +1,22 @@
 import { ModalInfoType } from "@/component/ModalForm/types"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export const useModal = (
   title: string,
   tableId: string,
-  flushTable: ()=>void,
-  insertDataApi: Function,
-  editDataApi: Function,
+  flushTable: () => void,
+  insertDataApi: (value: any) => void,
+  editDataApi: (value: any) => void,
   formItem: ModalInfoType["formItem"]
 ) => {
   const [modalInfo, setModalInfo] = useState<ModalInfoType>({
     title: "",
-    onCancel: () => {},
-    onCreate: () => {},
+    onCancel: undefined,
+    onCreate: undefined,
     formItem: []
   })
   const [visible, setVisible] = useState<boolean>(false)
+  //点击新增
   const addClick = () => {
     setModalInfo({
       title: `新增${title}`,
@@ -34,6 +35,7 @@ export const useModal = (
     })
     setVisible(true)
   }
+  //点击编辑
   const editClick = (record: any) => {
     setModalInfo({
       title: `编辑${title}`,
@@ -52,9 +54,6 @@ export const useModal = (
     })
     setVisible(true)
   }
-  useEffect(() => {
-    console.log(formItem)
-  }, [formItem])
   return {
     addClick,
     editClick,
