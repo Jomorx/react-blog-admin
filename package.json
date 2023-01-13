@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "prettier": "prettier --write .",
-    "lint": "prettier --write .",
+    "lint": "eslint .",
     "prepare": "husky install",
     "commit": "git-cz"
   },

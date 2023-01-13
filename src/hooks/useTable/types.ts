@@ -5,3 +5,9 @@ export interface TableInfo<T> {
   data: T[]
   searchText: string
 }
+export type IGetDataApi = (
+  currentPage: number,
+  pageSize: number,
+  searchText: string
+) => any
+export type IDeleteDataApi = (deleteIdList: number[]) => any

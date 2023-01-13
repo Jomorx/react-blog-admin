@@ -6,9 +6,9 @@ import { ITag } from "@/api/tag"
 export const getTagListApi = (
   currentPage: number,
   pageSize: number,
-  searchText: string
+  searchText?: string
 ): Promise<ReturnType<DataType<ITag>>> =>
-  request.get(`/tag/getTagList`, {
+  request.get("/tag/getTagList", {
     params: {
       currentPage,
       pageSize,
@@ -20,7 +20,7 @@ export const insertTagApi = (tagName: string) =>
   request.post("/tag/insertTag", { tagName })
 
 export const deleteTagListApi = (tagList: number[]) =>
-  request.post(`/tag/deleteTagList`, { tagList })
+  request.post("/tag/deleteTagList", { tagList })
 
-export const editTagApi = (tagId: number, tagName: object) =>
-  request.post(`/tag/editTag`, { tagId, ...tagName })
+export const editTagApi = (tag:ITag) =>
+  request.post("/tag/editTag", tag)

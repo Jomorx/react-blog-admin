@@ -1,5 +1,5 @@
-import { Button, Form, Input, Modal, Radio, Switch } from "antd"
-import React, { useEffect, useState } from "react"
+import { Form, Input, Modal, Switch } from "antd"
+import React from "react"
 import UploadImg from "../UploadImg"
 import { FormItem, ModalInfoType } from "./types"
 interface IProps {
@@ -18,7 +18,7 @@ const switchRender = (type: string, item: FormItem, form: any) => {
       return <UploadImg item={item} form={form} />
     }
     case "ButtonWithPopover": {
-      return item.popoverItem!(item, form)
+      return item.popoverItem?.(item, form)
     }
     case "switch": {
       return <Switch></Switch>
@@ -39,7 +39,7 @@ const CollectionCreateForm: React.FC<IProps> = ({ visible, ModalInfo }) => {
         form
           .validateFields()
           .then(async (values) => {
-            await ModalInfo.onCreate(values)
+            await ModalInfo.onCreate?.(values)
             form.resetFields()
           })
           .catch((info) => {

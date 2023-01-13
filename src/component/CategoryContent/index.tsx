@@ -2,21 +2,22 @@ import { getCategoryListApi } from "@/api/category/CategoryApi"
 import { FormItem } from "@/component/ModalForm/types"
 import { Button, Popover, Tag } from "antd"
 import React, { useEffect, useState } from "react"
-import { RowType } from "../../CategoryManage/types"
-import style from "./categoryContent.module.less"
+import { ICategory } from "@/api/category"
+import styles from "./categoryContent.module.less"
 const CategoryContent = (item: FormItem, form: any) => {
-  const [data, setData] = useState<RowType[]>()
-  const [value, setValue] = useState<RowType>()
+  const [data, setData] = useState<ICategory[]>([])
+  const [value, setValue] = useState<ICategory>()
   const content = () => {
     return (
       <div style={{ width: "400px" }}>
         {data?.map((item) => {
           return (
             <li
-              className={style.categoryLi}
+              className={styles["category-li"]}
               key={item.categoryId}
               onClick={(e) => {
                 setValue(item)
+                form.setFieldsValue({ categoryId: item.categoryId })
               }}
             >
               {item.categoryName}
@@ -27,19 +28,18 @@ const CategoryContent = (item: FormItem, form: any) => {
     )
   }
   const init = async () => {
-    const res = await getCategoryListApi(10, 1, "")
+    const res = await getCategoryListApi(1, 100, "")
     setData(res.data.rows)
   }
   useEffect(() => {
-    setValue(item.initialValue)
-  }, [item.initialValue])
-  useEffect(() => {
-    form.setFieldsValue({ categoryId: value?.categoryId })
-  }, [value])
-  useEffect(() => {
     init()
   }, [])
+  useEffect(() => {
+    setValue(item.initialValue)
+    console.log(item.initialValue)
 
+    form.setFieldValue("categoryId", item.initialValue?.categoryId)
+  }, [item.initialValue])
   return (
     <>
       {value === undefined ? (
@@ -53,7 +53,7 @@ const CategoryContent = (item: FormItem, form: any) => {
             setValue(undefined)
           }}
         >
-          {value!.categoryName}
+          {value.categoryName}
         </Tag>
       )}
     </>

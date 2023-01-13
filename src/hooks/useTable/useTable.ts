@@ -1,7 +1,10 @@
-import { TableInfo } from "./types"
+import { IDeleteDataApi, IGetDataApi, TableInfo } from "./types"
 import { useEffect, useState, useCallback } from "react"
 
-export const useTable = <T>(getDataApi: any, deleteDataApi: any) => {
+export const useTable = <T>(
+  getDataApi: IGetDataApi,
+  deleteDataApi: IDeleteDataApi
+) => {
   const [tableInfo, setTableInfo] = useState<TableInfo<T>>({
     currentPage: 1,
     pageSize: 10,
@@ -18,7 +21,7 @@ export const useTable = <T>(getDataApi: any, deleteDataApi: any) => {
     onChange: onSelectChange
   }
 
-  const onSearch = (value: string, event: any) => {
+  const onSearch = (value: string) => {
     setTableInfo({ ...tableInfo, searchText: value, currentPage: 1 })
   }
   const flushTable = useCallback(async () => {

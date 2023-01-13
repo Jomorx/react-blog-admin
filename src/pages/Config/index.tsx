@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react"
+import React,{ useEffect, useState } from "react"
 import { Button, Input } from "antd"
 import MdEditor from "md-editor-rt"
 import PageHeader from "@/component/PageHeader"
 import style from "./index.module.less"
 import { useParams } from "react-router-dom"
 import { getConfigByIdApi, editConfigApi, IConfig } from "@/api/config"
-function index() {
+function Config() {
   const [initData, setInitData] = useState<IConfig>({
     configId: 0,
     configName: "",
@@ -65,4 +65,4 @@ function index() {
   )
 }
 
-export default index
+export default Config

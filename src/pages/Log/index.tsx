@@ -38,7 +38,7 @@ function Log() {
       ></ButtonHeader>
       <Table
         bordered
-        rowKey="categoryId"
+        rowKey="logId"
         rowSelection={rowSelection}
         columns={columns}
         dataSource={tableInfo.data}

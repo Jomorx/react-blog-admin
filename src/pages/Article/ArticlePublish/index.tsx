@@ -1,23 +1,24 @@
-import { useEffect, useState } from "react"
+import React,{ useEffect, useState } from "react"
 import { Button, Input } from "antd"
 import MdEditor from "md-editor-rt"
 import PageHeader from "@/component/PageHeader"
 import style from "./index.module.less"
 import ModalForm from "@/component/ModalForm"
 import { ModalInfoType } from "@/component/ModalForm/types"
-import categoryContent from "./CategoryContent/categoryContent"
-import tagContent from "./TagContent"
+import categoryContent from "@/component/CategoryContent"
+import tagContent from "@/component/TagContent"
 import {
   getArticleByIdApi,
   updateArticleApi,
   uploadArticleApi
 } from "@/api/article/ArticleApi"
 import { useParams } from "react-router-dom"
-function index() {
+import { IArticle } from "@/api/article"
+function ArticlePublish() {
   const [title, setTitle] = useState("hello")
   const [text, setText] = useState("hello md-editor-rt!")
   const [visible, setVisible] = useState<boolean>(false)
-  const [initValue, setInitValue] = useState<any>()
+  const [initValue, setInitValue] = useState<IArticle>()
   const param = useParams()
   const modalInfo: ModalInfoType = {
     onCreate: async (value) => {
@@ -100,16 +101,12 @@ function index() {
     setVisible(true)
   }
 
-  useEffect(() => {
-    if (initValue !== undefined) {
-      setText(initValue.articleContent)
-      setTitle(initValue.articleTitle)
-    }
-  }, [initValue])
   const init = async () => {
     if (JSON.stringify(param) !== "{}") {
       const res = await getArticleByIdApi(param.id)
       setInitValue(res.data)
+      setText(res.data.articleContent)
+      setTitle(res.data.articleTitle)
     }
   }
   useEffect(() => {
@@ -152,4 +149,4 @@ function index() {
   )
 }
 
-export default index
+export default ArticlePublish
