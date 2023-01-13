@@ -15,7 +15,7 @@ export interface FormItem {
 }
 export interface ModalInfoType {
   onCreate: ((values: any) => void) | undefined
-  onCancel: (() => void | undefined) | undefined
+  onCancel: (() => void) | undefined
   title: string
   formItem: FormItem[]
 }

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, {  useState } from "react"
 import PageHeader from "@/component/PageHeader"
 import OperationButton from "@/component/OperationButton"
 import { Pagination, Table } from "antd"
-import { TableInfo } from "./types"
 import { ColumnsType } from "antd/lib/table"
 import ButtonHeader from "@/component/ButtonHeader"
 import ModalForm from "@/component/ModalForm"
@@ -16,18 +15,19 @@ import {
   insertFriendChainApi
 } from "@/api/friendChain"
 import { useTable } from "@/hooks"
-function index() {
+function Links() {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const { tableInfo, setTableInfo, flushTable } = useTable<IFriendChain>(
-    getFriendChainListApi
+    getFriendChainListApi,
+    deleteFriendChainListApi
   )
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys)
   }
   const [modalInfo, setModalInfo] = useState<ModalInfoType>({
     title: "编辑标签",
-    onCreate: () => {},
-    onCancel: () => {},
+    onCreate: undefined,
+    onCancel: undefined,
     formItem: []
   })
   const [visible, setVisible] = useState<boolean>(false)
@@ -290,4 +290,4 @@ function index() {
   )
 }
 
-export default index
+export default Links

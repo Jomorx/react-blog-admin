@@ -1,14 +1,13 @@
+import { IArticle } from "@/api/article"
 import { getArticleListApi } from "@/api/article/ArticleApi"
-import { ArticleListType } from "@/pages/Article/ArticleList/types"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { RootState } from ".."
 export type articleState = {
-  articleList: ArticleListType[]
+  articleList: IArticle[]
 }
 const initialState: articleState = {
   articleList: []
 }
-interface payloadType {}
 export const getArticleList = createAsyncThunk<
   void,
   [number, number, string],

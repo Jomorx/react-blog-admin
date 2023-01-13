@@ -1,6 +1,4 @@
-import { RouteItem } from "@/router/types"
 import moment from "moment"
-import MenuItem from "_antd@4.21.6@antd/lib/menu/MenuItem"
 
 //全屏
 export const fullScreen = () => {
