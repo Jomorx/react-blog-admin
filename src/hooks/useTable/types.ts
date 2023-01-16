@@ -11,3 +11,5 @@ export type IGetDataApi = (
   searchText: string
 ) => any
 export type IDeleteDataApi = (deleteIdList: number[]) => any
+export type IEditClick<T> =(arg:T)=>void
+export type IFlushTable = ()=>void

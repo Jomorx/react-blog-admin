@@ -1,17 +1,24 @@
-import { defineConfig } from "vite"
-import react from "@vitejs/plugin-react"
-// import path from "path";
-const path = require("path")
-import { UserConfigExport, ConfigEnv } from "vite"
-// https://vitejs.dev/config/
-export default ({ command }: ConfigEnv): UserConfigExport => ({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src")
-    }
+import { defineConfig, loadEnv } from "vite"
+import viteBaseConfig from "./config/vite.base.config"
+import viteProdConfig from "./config/vite.prod.config"
+import viteDevConfig from "./config/vite.dev.config"
+
+const envResolver = {
+  build: () => {
+    console.log("生产环境")
+    return { ...viteBaseConfig, ...viteProdConfig }
   },
-  server: {
-    port: 7070
+  serve: () => {
+    console.log("开发环境")
+    return { ...viteBaseConfig, ...viteDevConfig } // 新配置里是可能会被配置envDir .envA
   }
+}
+// https://vitejs.dev/config/
+export default defineConfig(({ command, mode }) => {
+  // 是build 还是serve主要取决于我们敲的命令是开启开发环境还是生产环境
+  // console.log("process", process.cwd());
+  // 当前env文件所在的目录
+  // 第二个参数不是必须要使用process.cwd(),
+  // const env = loadEnv(mode, process.cwd(), "");
+  return envResolver[command]()
 })

@@ -1,10 +1,12 @@
+import React from "react"
 import { deleteTagListApi, ITag } from "@/api/tag"
 import OperationButton from "@/component/OperationButton"
 import { formatTime } from "@/utils"
 import { ColumnsType } from "antd/lib/table"
+import { IEditClick, IFlushTable } from "@/hooks/useTable/types"
 export const tableConfig = (
-  flushTable: Function,
-  editClick: Function
+  flushTable: IFlushTable,
+  editClick: IEditClick<ITag>
 ): ColumnsType<ITag> => {
   return [
     {

@@ -1,8 +1,9 @@
+import React from "react"
 import { useAppDispatch, useAppSelector } from "@/hooks/useStore"
 import { getArticleList } from "@/store/articleStore"
 import { shallowEqual } from "react-redux"
 import style from "./index.module.less"
-const index = () => {
+const Console = () => {
   const store = useAppSelector(
     (state) => ({ articleList: state.articleStore.articleList }),
     shallowEqual
@@ -23,4 +24,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Console

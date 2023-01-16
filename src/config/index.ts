@@ -2,8 +2,9 @@ import { notification } from "antd"
 import axios, { AxiosInstance } from "axios"
 import nprogress from "nprogress"
 import "nprogress/nprogress.css"
+
 const request: AxiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: import.meta.env.ENV_BASEURL,
   timeout: 3000
 })
 type NotificationType = "success" | "info" | "warning" | "error"

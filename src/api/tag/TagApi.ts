@@ -22,5 +22,4 @@ export const insertTagApi = (tagName: string) =>
 export const deleteTagListApi = (tagList: number[]) =>
   request.post("/tag/deleteTagList", { tagList })
 
-export const editTagApi = (tag:ITag) =>
-  request.post("/tag/editTag", tag)
+export const editTagApi = (tag: ITag) => request.post("/tag/editTag", tag)
