@@ -1,12 +1,8 @@
 import React, { useState } from "react"
 import PageHeader from "@/component/PageHeader"
-import OperationButton from "@/component/OperationButton"
 import { Pagination, Table } from "antd"
-import { ColumnsType } from "antd/lib/table"
 import ButtonHeader from "@/component/ButtonHeader"
 import ModalForm from "@/component/ModalForm"
-import { ModalInfoType } from "@/component/ModalForm/types"
-import { formatTime } from "@/utils"
 import {
   IFriendChain,
   deleteFriendChainListApi,

@@ -34,8 +34,6 @@ export const useTable = <T>(
   }, [getDataApi, tableInfo])
 
   useEffect(() => {
-    console.log(132);
-
     flushTable()
   }, [tableInfo.pageSize, tableInfo.currentPage, tableInfo.searchText])
   //删除
