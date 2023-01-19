@@ -1,10 +1,10 @@
 import { ReactNode } from "react"
 
-export interface RouteItem {
+export interface RouteItem   {
   element?: ReactNode
   path: string
   children?: RouteItem[]
-  key?: string
+  key: string
   icon?: ReactNode
   label?: string
 }

@@ -1,4 +1,3 @@
-import React from "react"
 import {
   deleteArticleListApi,
   getArticleListApi,
@@ -6,6 +5,7 @@ import {
 } from "@/api/article"
 import { useTable } from "@/hooks"
 import { Button, Table, Pagination } from "antd"
+import React  from "react"
 import { useNavigate } from "react-router-dom"
 import PageHeader from "../../../component/PageHeader"
 import { tableConfig } from "./table.config"
@@ -17,7 +17,7 @@ function ArticleList() {
     flushTable,
     rowSelection,
     batchDelete,
-    onSearch
+    // onSearch
   } = useTable<IArticle>(getArticleListApi, deleteArticleListApi)
   const navigate = useNavigate()
 
@@ -54,7 +54,7 @@ function ArticleList() {
         columns={columns}
         dataSource={tableInfo.data}
         pagination={false}
-      />
+      ></Table>
       <div style={{ display: "flex", flexDirection: "row-reverse" }}>
         <Pagination
           style={{ marginTop: "10px" }}

@@ -1,6 +1,6 @@
-import { lazy } from "react"
+import React, { lazy } from "react"
 const Layout = lazy(() => import("@/layouts/ManageLayout"))
-const Console = lazy(() => import("@/pages/Console"))
+const Dashboard = lazy(() => import("@/pages/Dashboard"))
 
 const CategoryManage = lazy(() => import("@/pages/Article/CategoryManage"))
 const TagManage = lazy(() => import("@/pages/Article/TagManage"))
@@ -21,10 +21,11 @@ import Log from "@/pages/Log"
 const router: RouteItem[] = [
   {
     element: <Layout />,
+    key:"/",
     path: "/",
     children: [
       {
-        element: <Console />,
+        element: <Dashboard />,
         path: "/",
         key: "/",
         icon: <GlobalOutlined />,
@@ -37,23 +38,24 @@ const router: RouteItem[] = [
         key: "/article",
         children: [
           {
-            path: "article-list",
-            element: <ArticleList />,
-            key: "/article/article-publish",
+            path: "article-publish/:id",
+            element: <ArticlePublish />,
+            key: "/article/article-publish/-1",
             icon: <FileTextOutlined />,
             label: "发布文章"
           },
           {
-            path: "article-publish",
-            element: <ArticlePublish />,
+            path: "article-list",
+            element: <ArticleList />,
             key: "/article/article-list",
             icon: <FileTextOutlined />,
             label: "文章列表"
           },
-          {
-            path: "article-publish/:id",
-            element: <ArticlePublish />
-          },
+
+          // {
+          //   path: "article-publish/:id",
+          //   element: <ArticlePublish />
+          // },
           {
             path: "tag-manage",
             element: <TagManage />,
@@ -89,10 +91,6 @@ const router: RouteItem[] = [
             key: "/project/project-list",
             icon: <FileTextOutlined />,
             label: "作品列表"
-          },
-          {
-            path: "project-publish/:id",
-            element: <ProjectPublish />
           }
         ]
       },
@@ -121,11 +119,13 @@ const router: RouteItem[] = [
   },
   {
     path: "/login",
-    element: <Login />
+    element: <Login />,
+    key: "/login"
   },
   {
     path: "*",
-    element: <NotFound />
+    element: <NotFound />,
+    key: "*"
   }
 ]
 export default router

@@ -9,10 +9,10 @@ interface IProps {
 const switchRender = (type: string, item: FormItem, form: any) => {
   switch (type) {
     case "input": {
-      return <Input></Input>
+      return <Input />
     }
     case "textarea": {
-      return <Input type="textarea"></Input>
+      return <Input type="textarea" />
     }
     case "upload": {
       return <UploadImg item={item} form={form} />
@@ -21,7 +21,7 @@ const switchRender = (type: string, item: FormItem, form: any) => {
       return item.popoverItem?.(item, form)
     }
     case "switch": {
-      return <Switch></Switch>
+      return <Switch />
     }
   }
 }
@@ -35,6 +35,7 @@ const CollectionCreateForm: React.FC<IProps> = ({ visible, ModalInfo }) => {
       okText="确定"
       cancelText="取消"
       onCancel={ModalInfo.onCancel}
+      getContainer={false}
       onOk={() => {
         form
           .validateFields()

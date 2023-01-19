@@ -1,26 +1,19 @@
 import { getArticleListApi } from "@/api/article/ArticleApi"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { RootState } from ".."
-import { IArticleState } from "./types"
+import { IConsoleState } from "./types"
 
-const initialState: IArticleState = {
+const initialState: IConsoleState = {
   articleList: {
     count:0,
     rows:[]
   }
 }
-const articleStore = createSlice({
+const consoleStore = createSlice({
   name: "articleStore",
   initialState,
   reducers: {
-    changeArticleListAction(state, { payload }) {
-      if(payload.count!==state.articleList.count){
-        state.articleList.count = payload.count
-        state.articleList.rows =payload.rows
-      }else{
-        state.articleList.rows =state.articleList.rows.concat(payload.rows)
-      }
-    }
+
   }
 })
 /**
@@ -33,7 +26,6 @@ export const getArticleList = createAsyncThunk<
   { state: RootState }
 >("article/fetchArticle", async (payload, { dispatch }) => {
   const res = await getArticleListApi(...payload)
-  dispatch(changeArticleListAction(res.data))
 })
-export default articleStore.reducer
-export const { changeArticleListAction } = articleStore.actions
+export default consoleStore.reducer
+// export const {  } = consoleStore.actions

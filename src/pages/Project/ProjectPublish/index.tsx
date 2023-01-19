@@ -12,7 +12,7 @@ import {
   updateProjectApi,
   uploadProjectApi
 } from "@/api/ProjectApi"
-function index() {
+function ProjectPublish() {
   const [title, setTitle] = useState("hello")
   const [text, setText] = useState("hello md-editor-rt!")
   const [visible, setVisible] = useState<boolean>(false)
@@ -20,7 +20,7 @@ function index() {
   const param = useParams()
   const modalInfo: ModalInfoType = {
     onCreate: async (value) => {
-      if (JSON.stringify(param) === "{}") {
+      if (param.id === "-1") {
         const res = await uploadProjectApi({
           ...value,
           projectName: title,
@@ -118,4 +118,4 @@ function index() {
   )
 }
 
-export default index
+export default ProjectPublish

@@ -1,5 +1,6 @@
 import moment from "moment"
 
+
 //全屏
 export const fullScreen = () => {
   const el = document.documentElement
@@ -7,13 +8,6 @@ export const fullScreen = () => {
   if (typeof rfs != "undefined" && rfs) {
     rfs.call(el)
   }
-  // else if (typeof (window as any).ActiveXObject != "undefined") {
-  //   // for Internet Explorer
-  //   const wscript = new ActiveXObject("WScript.Shell");
-  //   if (wscript != null) {
-  //     wscript.SendKeys("{F11}");
-  //   }
-  // }
 }
 
 export const formatTime = (time: Date) => {
@@ -24,3 +18,4 @@ export const formatTime = (time: Date) => {
 export const getToken = (): string => localStorage.getItem("token")!
 export const setToken = (token: string) => localStorage.setItem("token", token)
 export const removeToken = () => localStorage.removeItem("token")
+

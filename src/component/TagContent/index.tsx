@@ -11,7 +11,7 @@ const TagContent = (item: FormItem, form: any) => {
     return (
       <div style={{ width: "400px" }}>
         {data
-          ?.filter((item) => {
+          .filter((item) => {
             return !selected.includes(item.tagId)
           })
           .map((item) => {
@@ -40,9 +40,10 @@ const TagContent = (item: FormItem, form: any) => {
   useEffect(() => {
     init()
   }, [])
+
   useEffect(() => {
     setValue(item.initialValue ?? [])
-    setSelected(item.initialValue?.map((item: ITag) => item.tagId))
+    setSelected(item.initialValue?item.initialValue.map((item: ITag) => item.tagId):[])
   }, [item.initialValue])
   return (
     <>

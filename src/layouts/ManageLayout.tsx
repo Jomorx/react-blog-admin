@@ -1,26 +1,21 @@
-import { Layout, Avatar, Popover } from "antd"
-import Menu from "@/component/Menu"
+import { Layout, Avatar, Popover, Menu } from "antd"
 import Breadcrumb from "@/component/Breadcrumb"
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   ExpandOutlined
 } from "@ant-design/icons"
-import React, { useEffect, useState } from "react"
-import { Outlet, useLocation, useNavigate } from "react-router-dom"
+import React, { useState } from "react"
+import { Outlet, useNavigate } from "react-router-dom"
 import style from "./index.module.less"
 const { Header, Sider, Content } = Layout
-import { fullScreen, getToken, removeToken } from "@/utils"
+import { fullScreen } from "@/utils"
 import { Suspense } from "react"
-import router from "@/router/routes"
+import { menuItems } from "@/utils/menu"
 
-const App: React.FC = () => {
+const ManageLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
   const navigate = useNavigate()
-  //没有token重定向到登录
-  // useEffect(() => {
-  //   getToken() || navigate("/login");
-  // }, []);
   return (
     <Layout className={style.layout}>
       <div
@@ -39,7 +34,12 @@ const App: React.FC = () => {
           <div className={style.logo}>
             <span>{collapsed ? "系统" : "博客管理系统"}</span>
           </div>
-          <Menu collapsed={collapsed}></Menu>
+          <Menu
+            items={menuItems}
+            mode="inline"
+            onClick={({ key }) => navigate(key)}
+            theme="dark"
+          />
         </Sider>
       </div>
       <Layout
@@ -70,17 +70,7 @@ const App: React.FC = () => {
               }}
             />
             <Popover
-              content={
-                <div
-                  style={{ cursor: "pointer" }}
-                  onClick={(e) => {
-                    removeToken()
-                    navigate("/login")
-                  }}
-                >
-                  退出登录
-                </div>
-              }
+              content={<div style={{ cursor: "pointer" }}>退出登录</div>}
             >
               <Avatar>U</Avatar>
             </Popover>
@@ -105,4 +95,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default ManageLayout

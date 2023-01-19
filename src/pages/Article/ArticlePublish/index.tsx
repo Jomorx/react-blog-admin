@@ -14,15 +14,16 @@ import {
 } from "@/api/article/ArticleApi"
 import { useParams } from "react-router-dom"
 import { IArticle } from "@/api/article"
-function ArticlePublish() {
-  const [title, setTitle] = useState("hello")
-  const [text, setText] = useState("hello md-editor-rt!")
+
+const ArticlePublish = () => {
+  const [title, setTitle] = useState("")
+  const [text, setText] = useState("")
   const [visible, setVisible] = useState<boolean>(false)
   const [initValue, setInitValue] = useState<IArticle>()
   const param = useParams()
   const modalInfo: ModalInfoType = {
     onCreate: async (value) => {
-      if (JSON.stringify(param) === "{}") {
+      if (param.id === "-1") {
         await uploadArticleApi({
           ...value,
           articleTitle: title,
@@ -92,7 +93,7 @@ function ArticlePublish() {
         ],
         getValueFromEvent: (isSwitch) => (isSwitch ? 1 : 0),
         valuePropName: "checked",
-        initialValue: initValue?.isTop
+        initialValue: !!initValue?.isTop
       }
     ],
     title: "发布文章"
@@ -102,7 +103,7 @@ function ArticlePublish() {
   }
 
   const init = async () => {
-    if (JSON.stringify(param) !== "{}") {
+    if (param.id !== "-1") {
       const res = await getArticleByIdApi(param.id)
       setInitValue(res.data)
       setText(res.data.articleContent)

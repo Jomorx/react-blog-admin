@@ -12,7 +12,7 @@ const App: React.FC<{ src?: string; form: FormInstance; item: FormItem }> = (
   const config = {
     name: "file",
     multiple: false,
-    action: "http://localhost:3000/upload",
+    action: `${import.meta.env.ENV_BASEURL}/upload`,
     onChange(info: any) {
       const { status } = info.file
       if (status === "done") {
