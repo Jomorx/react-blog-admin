@@ -73,7 +73,7 @@ function ProjectPublish() {
     }
   }, [initValue])
   const init = async () => {
-    if (JSON.stringify(param) !== "{}") {
+    if (param.id!=="-1") {
       const res = await getProjectByIdApi(param.id)
       setInitValue(res as any)
     }

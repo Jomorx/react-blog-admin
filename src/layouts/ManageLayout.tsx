@@ -6,7 +6,7 @@ import {
   ExpandOutlined
 } from "@ant-design/icons"
 import React, { useState } from "react"
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet, useLocation, useNavigate } from "react-router-dom"
 import style from "./index.module.less"
 const { Header, Sider, Content } = Layout
 import { fullScreen } from "@/utils"
@@ -15,6 +15,7 @@ import { menuItems } from "@/utils/menu"
 
 const ManageLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
+  const location = useLocation()
   const navigate = useNavigate()
   return (
     <Layout className={style.layout}>
@@ -35,6 +36,7 @@ const ManageLayout: React.FC = () => {
             <span>{collapsed ? "系统" : "博客管理系统"}</span>
           </div>
           <Menu
+            defaultSelectedKeys={[location.pathname]}
             items={menuItems}
             mode="inline"
             onClick={({ key }) => navigate(key)}

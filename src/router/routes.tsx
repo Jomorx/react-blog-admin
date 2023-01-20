@@ -26,8 +26,8 @@ const router: RouteItem[] = [
     children: [
       {
         element: <Dashboard />,
-        path: "/",
-        key: "/",
+        path: "/dashboard",
+        key: "/dashboard",
         icon: <GlobalOutlined />,
         label: "控制台"
       },
@@ -51,11 +51,6 @@ const router: RouteItem[] = [
             icon: <FileTextOutlined />,
             label: "文章列表"
           },
-
-          // {
-          //   path: "article-publish/:id",
-          //   element: <ArticlePublish />
-          // },
           {
             path: "tag-manage",
             element: <TagManage />,
@@ -79,9 +74,9 @@ const router: RouteItem[] = [
         key: "/project",
         children: [
           {
-            path: "project-publish",
+            path: "project-publish/:id",
             element: <ProjectPublish />,
-            key: "/project/project-publish",
+            key: "/project/project-publish/-1",
             icon: <FileTextOutlined />,
             label: "发布作品"
           },
