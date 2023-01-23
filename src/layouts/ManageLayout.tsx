@@ -12,6 +12,7 @@ const { Header, Sider, Content } = Layout
 import { fullScreen } from "@/utils"
 import { Suspense } from "react"
 import { menuItems } from "@/utils/menu"
+import { ItemType } from "antd/es/menu/hooks/useItems"
 
 const ManageLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
@@ -37,7 +38,7 @@ const ManageLayout: React.FC = () => {
           </div>
           <Menu
             selectedKeys={[location.pathname]}
-            items={menuItems}
+            items={menuItems as ItemType[] | undefined}
             mode="inline"
             onClick={({ key }) => navigate(key)}
             theme="dark"

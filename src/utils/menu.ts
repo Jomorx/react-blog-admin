@@ -17,7 +17,7 @@ const getItem = (
     type
   } as MenuItem
 }
-export const menuItems: MenuItem[] = routes[0].children?.map((item) => {
+export const menuItems = routes[0].children?.map((item) => {
   if (item.label)
     if (item.children?.length)
       return getItem(
