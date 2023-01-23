@@ -1,11 +1,12 @@
-import { deleteCategoryListApi, ICategory } from "@/api/category"
+import React from "react"
+import { ICategory } from "@/api/category"
 import OperationButton from "@/component/OperationButton"
+import { ITableConfig } from "@/hooks/useTable/types"
 import { formatTime } from "@/utils"
-import { ColumnsType } from "antd/lib/table"
-export const tableConfig = (
-  flushTable: Function,
-  editClick: Function
-): ColumnsType<ICategory> => {
+const categoryTableConfig: ITableConfig<ICategory> = ({
+  editClick,
+  batchDelete
+}) => {
   return [
     {
       title: "分类名",
@@ -54,7 +55,7 @@ export const tableConfig = (
     {
       title: "操作",
       dataIndex: "operation",
-      render: (text, record, index) => {
+      render: (text, record) => {
         return (
           <>
             <OperationButton
@@ -62,8 +63,7 @@ export const tableConfig = (
                 editClick(record)
               }}
               clickDelete={async () => {
-                await deleteCategoryListApi([record.categoryId as number])
-                flushTable()
+                batchDelete([record.categoryId])
               }}
             />
           </>
@@ -73,3 +73,4 @@ export const tableConfig = (
     }
   ]
 }
+export default categoryTableConfig

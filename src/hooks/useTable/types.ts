@@ -1,3 +1,5 @@
+import { ColumnsType } from "antd/lib/table"
+
 export interface TableInfo<T> {
   count: number
   currentPage: number
@@ -10,6 +12,14 @@ export type IGetDataApi = (
   pageSize: number,
   searchText: string
 ) => any
-export type IDeleteDataApi = (deleteIdList: number[]) => any
-export type IEditClick<T> =(arg:T)=>void
-export type IFlushTable = ()=>void
+export type IDeleteDataApi = (deleteIdList: number[]) => void
+
+export type IDeleteClick = (deleteIdList: number[]) => void
+export type IEditClick<T> = (arg: T) => void
+export type ITableConfig<T> = ({
+  editClick,
+  batchDelete
+}: {
+  editClick: IEditClick<T>
+  batchDelete: IDeleteClick
+}) => ColumnsType<T>

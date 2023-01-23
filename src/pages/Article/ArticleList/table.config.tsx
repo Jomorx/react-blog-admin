@@ -1,16 +1,14 @@
-import { deleteArticleListApi, IArticle, switchIsTopApi } from "@/api/article"
+import { IArticle, switchIsTopApi } from "@/api/article"
 import OperationButton from "@/component/OperationButton"
-import { IFlushTable } from "@/hooks/useTable/types"
+import { ITableConfig } from "@/hooks/useTable/types"
 import { formatTime } from "@/utils"
 import { Tag, Switch } from "antd"
-import { ColumnsType } from "antd/lib/table"
 import React from "react"
-import { NavigateFunction } from "react-router-dom"
 
-export const tableConfig = (
-  flushTable: IFlushTable,
-  navigate: NavigateFunction
-): ColumnsType<IArticle> => [
+const articleTableConfig: ITableConfig<IArticle> = ({
+  editClick,
+  batchDelete
+}) => [
   {
     title: "创建时间",
     dataIndex: "createdAt",
@@ -39,8 +37,8 @@ export const tableConfig = (
   {
     title: "标签",
     dataIndex: "tagList",
-    render: (list) => {
-      return list.map((item: any) => {
+    render: (list:IArticle["tagList"]) => {
+      return list.map((item) => {
         return (
           <Tag key={item.tagId} color={"#2db7f5"}>
             {item.tagName}
@@ -76,11 +74,10 @@ export const tableConfig = (
         <>
           <OperationButton
             clickEdit={() => {
-              navigate(`/article/article-publish/${record.articleId}`, {})
+              editClick(`/article/article-publish/${record.articleId}` as any)
             }}
-            clickDelete={async () => {
-              await deleteArticleListApi([record.articleId] as number[])
-              flushTable()
+            clickDelete={() => {
+              batchDelete([record.articleId])
             }}
           />
         </>
@@ -89,3 +86,4 @@ export const tableConfig = (
     width: "250px"
   }
 ]
+export default articleTableConfig

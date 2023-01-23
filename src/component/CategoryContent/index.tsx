@@ -4,7 +4,8 @@ import { Button, Popover, Tag } from "antd"
 import React, { useEffect, useState } from "react"
 import { ICategory } from "@/api/category"
 import styles from "./categoryContent.module.less"
-const CategoryContent = (item: FormItem, form: any) => {
+import { FormInstance } from "antd/lib/form/Form"
+const CategoryContent = (form: FormInstance, item: FormItem) => {
   const [data, setData] = useState<ICategory[]>([])
   const [value, setValue] = useState<ICategory>()
   const content = () => {
@@ -15,7 +16,7 @@ const CategoryContent = (item: FormItem, form: any) => {
             <li
               className={styles["category-li"]}
               key={item.categoryId}
-              onClick={(e) => {
+              onClick={() => {
                 setValue(item)
                 form.setFieldsValue({ categoryId: item.categoryId })
               }}
@@ -35,11 +36,11 @@ const CategoryContent = (item: FormItem, form: any) => {
     init()
   }, [])
   useEffect(() => {
-    setValue(item.initialValue)
-    console.log(item.initialValue)
-
-    form.setFieldValue("categoryId", item.initialValue?.categoryId)
-  }, [item.initialValue])
+    if (item.initialValue) {
+      setValue(item.initialValue.categoryId)
+      form.setFieldValue("categoryId",item.initialValue.categoryId)
+    }
+  }, [item.initialValue,form])
   return (
     <>
       {value === undefined ? (
@@ -49,7 +50,7 @@ const CategoryContent = (item: FormItem, form: any) => {
       ) : (
         <Tag
           closable
-          onClose={(e) => {
+          onClose={() => {
             setValue(undefined)
           }}
         >

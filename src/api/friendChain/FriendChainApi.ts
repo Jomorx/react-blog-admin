@@ -7,7 +7,7 @@ export const getFriendChainListApi = (
   pageSize: number,
   searchText: string
 ): Promise<ReturnType<DataType<IFriendChain>>> =>
-  request.get(`/friendChain/getFriendChainList`, {
+  request.get("/friendChain/getFriendChainList", {
     params: {
       currentPage,
       pageSize,
@@ -16,7 +16,7 @@ export const getFriendChainListApi = (
   })
 
 export const deleteFriendChainListApi = (friendChainList: number[]) =>
-  request.post(`/friendChain/deleteFriendChainList`, { friendChainList })
+  request.post("/friendChain/deleteFriendChainList", { friendChainList })
 
 export const insertFriendChainApi = (friendChain: IFriendChain) =>
   request.post("/friendChain/insertFriendChain", friendChain)

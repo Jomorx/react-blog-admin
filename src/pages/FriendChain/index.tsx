@@ -4,44 +4,51 @@ import { Pagination, Table } from "antd"
 import ButtonHeader from "@/component/ButtonHeader"
 import ModalForm from "@/component/ModalForm"
 import {
-  deleteLogListApi,
-  editLogApi,
-  getLogListApi,
-  insertLogApi
-} from "@/api/log"
-import useColumns from "./table.config"
+  IFriendChain,
+  deleteFriendChainListApi,
+  editFriendChainApi,
+  getFriendChainListApi,
+  insertFriendChainApi
+} from "@/api/friendChain"
 import { useModal, useTable } from "@/hooks"
-import { ILog } from "@/api/log"
 import { modalConfig } from "./modal.config"
-function Log() {
+import friendChainTableConfig from "./table.config"
+function FriendChian() {
   const {
-    flushTable,
     tableInfo,
     setTableInfo,
+    flushTable,
     rowSelection,
     batchDelete,
     onSearch,
     selectedRowKeys
-  } = useTable<ILog>(getLogListApi, deleteLogListApi)
-  const { visible, modalInfo, addClick, editClick } =
-    useModal("日志", "logId", flushTable, insertLogApi, editLogApi, modalConfig)
+  } = useTable<IFriendChain>(getFriendChainListApi, deleteFriendChainListApi)
+  const { addClick, visible, modalInfo, editClick } = useModal(
+    "友链",
+    "friendChainId",
+    flushTable,
+    insertFriendChainApi,
+    editFriendChainApi,
+    modalConfig
+  )
 
-  const columns = useColumns({ editClick, batchDelete })
+  const columns = friendChainTableConfig({editClick,batchDelete})
+  columns.forEach((item) => {
+    item.align = "center"
+  })
 
   return (
     <>
-      <PageHeader title="日志管理" />
+      <PageHeader title="友链管理" />
       <ButtonHeader
-        batchDelete={() => {
-          batchDelete(selectedRowKeys as number[])
-        }}
+        batchDelete={()=>batchDelete(selectedRowKeys as number[])}
         newAdd={addClick}
-        placeHolder="请输入日志名"
+        placeHolder="请输入友链名"
         onSearch={onSearch}
       ></ButtonHeader>
       <Table
         bordered
-        rowKey="logId"
+        rowKey="friendChainId"
         rowSelection={rowSelection}
         columns={columns}
         dataSource={tableInfo.data}
@@ -55,6 +62,7 @@ function Log() {
           showQuickJumper
           showTotal={(total) => `Total ${total} items`}
           onChange={(page, pageSize) => {
+            console.log(page)
             setTableInfo((e) => {
               return { ...e, pageSize, currentPage: page }
             })
@@ -67,4 +75,4 @@ function Log() {
   )
 }
 
-export default Log
+export default FriendChian

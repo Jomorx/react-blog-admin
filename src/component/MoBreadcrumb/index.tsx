@@ -5,21 +5,21 @@ import BreadcrumbItem from "antd/lib/breadcrumb/BreadcrumbItem"
 import React, { Fragment, ReactNode } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import style from "./index.module.less"
-function index() {
+function MoBreadcrumb() {
   const location = useLocation()
   const navigate = useNavigate()
   const generate = (route: RouteItem[]): ReactNode => {
     return (
       <>
         {route.map((r: RouteItem) => {
-          if (location.pathname.indexOf(r.key!) !== -1) {
+          if (location.pathname.indexOf(r.key) !== -1) {
             return (
               <Fragment key={r.key}>
                 <BreadcrumbItem
                   className={style.breadCrumbItem}
-                  key={r.key!}
-                  onClick={(e) => {
-                    navigate(r.key!)
+                  key={r.key}
+                  onClick={() => {
+                    navigate(r.key)
                   }}
                 >
                   {r.label}
@@ -43,4 +43,4 @@ function index() {
   )
 }
 
-export default index
+export default MoBreadcrumb

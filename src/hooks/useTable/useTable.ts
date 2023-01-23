@@ -1,5 +1,5 @@
 import { IDeleteDataApi, IGetDataApi, TableInfo } from "./types"
-import { useEffect, useState, useCallback } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 
 export const useTable = <T>(
   getDataApi: IGetDataApi,
@@ -37,8 +37,8 @@ export const useTable = <T>(
     flushTable()
   }, [tableInfo.pageSize, tableInfo.currentPage, tableInfo.searchText])
   //删除
-  const batchDelete = async () => {
-    const res = await deleteDataApi(selectedRowKeys as number[])
+  const batchDelete = async (selectKeys: number[]) => {
+    await deleteDataApi(selectKeys)
     flushTable()
   }
   return {
@@ -48,6 +48,6 @@ export const useTable = <T>(
     selectedRowKeys,
     rowSelection,
     batchDelete,
-    onSearch
+    onSearch,
   }
 }

@@ -2,7 +2,7 @@ import { LoginApi } from "@/api/LoginApi"
 import { getToken, setToken } from "@/utils"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-function index(props: any) {
+function Login() {
   const Login = async () => {
     const { data } = await LoginApi(account, password)
     if (data.token) {
@@ -15,7 +15,7 @@ function index(props: any) {
   const navigate = useNavigate()
   useEffect(() => {
     getToken() && navigate("/")
-  }, [])
+  }, [navigate])
   return (
     <div>
       账号:
@@ -41,4 +41,4 @@ function index(props: any) {
   )
 }
 
-export default index
+export default Login

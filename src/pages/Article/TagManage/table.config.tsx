@@ -1,13 +1,12 @@
 import React from "react"
-import { deleteTagListApi, ITag } from "@/api/tag"
+import { ITag } from "@/api/tag"
 import OperationButton from "@/component/OperationButton"
 import { formatTime } from "@/utils"
-import { ColumnsType } from "antd/lib/table"
-import { IEditClick, IFlushTable } from "@/hooks/useTable/types"
-export const tableConfig = (
-  flushTable: IFlushTable,
-  editClick: IEditClick<ITag>
-): ColumnsType<ITag> => {
+import { ITableConfig } from "@/hooks/useTable/types"
+ const tagTableConfig: ITableConfig<ITag> = ({
+  editClick,
+  batchDelete
+}) => {
   return [
     {
       title: "标签名",
@@ -35,16 +34,15 @@ export const tableConfig = (
     {
       title: "操作",
       dataIndex: "operation",
-      render: (text, record, index) => {
+      render: (text, record) => {
         return (
           <>
             <OperationButton
               clickEdit={() => {
                 editClick(record)
               }}
-              clickDelete={async () => {
-                await deleteTagListApi([record.tagId as number])
-                flushTable()
+              clickDelete={() => {
+                batchDelete([record.tagId])
               }}
             />
           </>
@@ -54,3 +52,4 @@ export const tableConfig = (
     }
   ]
 }
+export default tagTableConfig

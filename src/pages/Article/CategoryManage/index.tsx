@@ -12,7 +12,7 @@ import {
 } from "@/api/category"
 import { useTable, useModal } from "@/hooks"
 import { modalConfig } from "./modal.config"
-import { tableConfig } from "./table.config"
+import categoryTableConfig from "./table.config"
 function CategoryManage() {
   const {
     tableInfo,
@@ -20,7 +20,8 @@ function CategoryManage() {
     flushTable,
     rowSelection,
     batchDelete,
-    onSearch
+    onSearch,
+    selectedRowKeys
   } = useTable<ICategory>(getCategoryListApi, deleteCategoryListApi)
   const { visible, modalInfo, addClick, editClick } = useModal(
     "分类",
@@ -31,7 +32,7 @@ function CategoryManage() {
     modalConfig
   )
 
-  const columns = tableConfig(flushTable, editClick)
+  const columns = categoryTableConfig({editClick,batchDelete})
   columns.forEach((item) => {
     item.align = "center"
   })
@@ -40,7 +41,7 @@ function CategoryManage() {
     <>
       <PageHeader title="分类管理" />
       <ButtonHeader
-        batchDelete={batchDelete}
+        batchDelete={()=>batchDelete(selectedRowKeys as number[])}
         newAdd={addClick}
         placeHolder="请输入分类名"
         onSearch={onSearch}
@@ -68,7 +69,7 @@ function CategoryManage() {
           current={tableInfo.currentPage}
         />
       </div>
-      <ModalForm visible={visible} ModalInfo={modalInfo!}></ModalForm>
+      <ModalForm visible={visible} ModalInfo={modalInfo}></ModalForm>
     </>
   )
 }

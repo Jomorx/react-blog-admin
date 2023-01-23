@@ -15,7 +15,7 @@ export const formatTime = (time: Date) => {
   return moment(time).format("YYYY-MM-DD")
 }
 
-export const getToken = (): string => localStorage.getItem("token")!
+export const getToken = (): string|null => localStorage.getItem("token")
 export const setToken = (token: string) => localStorage.setItem("token", token)
 export const removeToken = () => localStorage.removeItem("token")
 

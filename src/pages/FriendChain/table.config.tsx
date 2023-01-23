@@ -1,13 +1,9 @@
 import React from "react"
-import { deleteFriendChainListApi, IFriendChain } from "@/api/friendChain"
-import { ColumnsType } from "antd/lib/table"
+import { IFriendChain } from "@/api/friendChain"
 import { formatTime } from "@/utils"
 import OperationButton from "@/component/OperationButton"
-type editClick = (arg: IFriendChain) => void
-export const tableConfig = (
-  flushTable: () => void,
-  editClick: editClick
-): ColumnsType<IFriendChain> => [
+import { ITableConfig } from "@/hooks/useTable/types"
+ const friendChainTableConfig:ITableConfig<IFriendChain> = ({editClick,batchDelete}) => [
   {
     title: "友链名",
     dataIndex: "friendChainName",
@@ -53,16 +49,15 @@ export const tableConfig = (
   {
     title: "操作",
     dataIndex: "operation",
-    render: (text, record, index) => {
+    render: (text, record) => {
       return (
         <>
           <OperationButton
             clickEdit={() => {
               editClick(record)
             }}
-            clickDelete={async () => {
-              await deleteFriendChainListApi([record.friendChainId as number])
-              flushTable()
+            clickDelete={ () => {
+              batchDelete([record.friendChainId])
             }}
           />
         </>
@@ -71,3 +66,4 @@ export const tableConfig = (
     width: "250px"
   }
 ]
+export default friendChainTableConfig

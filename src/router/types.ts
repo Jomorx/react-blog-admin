@@ -6,5 +6,6 @@ export interface RouteItem   {
   children?: RouteItem[]
   key: string
   icon?: ReactNode
-  label?: string
+  label?: string,
+  index?:boolean
 }

@@ -1,12 +1,13 @@
 import { Button } from "antd"
 import Search from "antd/lib/input/Search"
-import React, { useState } from "react"
+import React from "react"
 interface IProps {
   batchDelete: () => void
   newAdd: () => void
   placeHolder: string
-  onSearch: (value: string, event: any) => void
+  onSearch: (value: string, event: IChangeEvent) => void
 }
+type IChangeEvent = React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLElement, MouseEvent> | React.KeyboardEvent<HTMLInputElement> | undefined
 const index: React.FC<IProps> = ({
   batchDelete,
   newAdd,
@@ -19,7 +20,7 @@ const index: React.FC<IProps> = ({
   const _newAdd = () => {
     newAdd()
   }
-  const _onSearch = (value: string, event: any) => {
+  const _onSearch = (value: string, event: IChangeEvent) => {
     onSearch(value, event)
   }
 
@@ -42,7 +43,7 @@ const index: React.FC<IProps> = ({
         </Button>
         <Button
           type="primary"
-          onClick={(e) => {
+          onClick={() => {
             _newAdd()
           }}
         >

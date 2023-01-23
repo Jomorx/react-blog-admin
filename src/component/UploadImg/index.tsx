@@ -1,6 +1,6 @@
 import { InboxOutlined } from "@ant-design/icons"
 import { FormInstance, message, Upload } from "antd"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { FormItem } from "../ModalForm/types"
 const { Dragger } = Upload
 
@@ -13,7 +13,7 @@ const App: React.FC<{ src?: string; form: FormInstance; item: FormItem }> = (
     name: "file",
     multiple: false,
     action: `${import.meta.env.ENV_BASEURL}/upload`,
-    onChange(info: any) {
+    onChange(info:any) {
       const { status } = info.file
       if (status === "done") {
         message.success(`${info.file.name} file uploaded successfully.`)
@@ -23,10 +23,6 @@ const App: React.FC<{ src?: string; form: FormInstance; item: FormItem }> = (
         message.error(`${info.file.name} file upload failed.`)
       }
     },
-
-    onDrop(e: any) {
-      console.log("Dropped files", e.dataTransfer.files)
-    }
   }
 
   return (

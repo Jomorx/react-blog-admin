@@ -1,4 +1,5 @@
 import { Form, Input, Modal, Switch } from "antd"
+import { FormInstance } from "antd/lib/form/Form"
 import React from "react"
 import UploadImg from "../UploadImg"
 import { FormItem, ModalInfoType } from "./types"
@@ -6,7 +7,7 @@ interface IProps {
   visible: boolean
   ModalInfo: ModalInfoType
 }
-const switchRender = (type: string, item: FormItem, form: any) => {
+const switchRender = (type: string, item: FormItem, form: FormInstance) => {
   switch (type) {
     case "input": {
       return <Input />
@@ -18,7 +19,7 @@ const switchRender = (type: string, item: FormItem, form: any) => {
       return <UploadImg item={item} form={form} />
     }
     case "ButtonWithPopover": {
-      return item.popoverItem?.(item, form)
+      return item.popoverItem?.(form, item)
     }
     case "switch": {
       return <Switch />

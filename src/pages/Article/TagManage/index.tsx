@@ -12,7 +12,7 @@ import ButtonHeader from "@/component/ButtonHeader"
 import ModalForm from "@/component/ModalForm"
 import { useTable, useModal } from "@/hooks"
 import { modalConfig } from "./modal.config"
-import { tableConfig } from "./table.config"
+import tagTableConfig from "./table.config"
 
 function TagManage() {
   const {
@@ -21,7 +21,8 @@ function TagManage() {
     flushTable,
     rowSelection,
     batchDelete,
-    onSearch
+    onSearch,
+    selectedRowKeys
   } = useTable<ITag>(getTagListApi, deleteTagListApi)
   const { addClick, visible, modalInfo, editClick } = useModal(
     "标签",
@@ -32,7 +33,7 @@ function TagManage() {
     modalConfig
   )
 
-  const columns = tableConfig(flushTable, editClick)
+  const columns = tagTableConfig({editClick,batchDelete})
   columns.forEach((item) => {
     item.align = "center"
   })
@@ -41,7 +42,7 @@ function TagManage() {
     <>
       <PageHeader title="标签管理" />
       <ButtonHeader
-        batchDelete={batchDelete}
+        batchDelete={()=>batchDelete(selectedRowKeys as number[])}
         newAdd={addClick}
         placeHolder="请输入标签名"
         onSearch={onSearch}
@@ -69,7 +70,7 @@ function TagManage() {
           }}
         />
       </div>
-      <ModalForm visible={visible} ModalInfo={modalInfo!}></ModalForm>
+      <ModalForm visible={visible} ModalInfo={modalInfo}></ModalForm>
     </>
   )
 }

@@ -1,5 +1,5 @@
 import { Layout, Avatar, Popover, Menu } from "antd"
-import Breadcrumb from "@/component/Breadcrumb"
+import Breadcrumb from "@/component/MoBreadcrumb"
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -36,7 +36,7 @@ const ManageLayout: React.FC = () => {
             <span>{collapsed ? "系统" : "博客管理系统"}</span>
           </div>
           <Menu
-            defaultSelectedKeys={[location.pathname]}
+            selectedKeys={[location.pathname]}
             items={menuItems}
             mode="inline"
             onClick={({ key }) => navigate(key)}

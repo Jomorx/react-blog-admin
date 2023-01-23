@@ -14,9 +14,9 @@ export const deleteArticleListApi = (articleIdList: number[]) =>
   request.post("/article/deleteArticleList", { articleIdList: articleIdList })
 export const switchIsTopApi = (articleId: number, isTop: number) =>
   request.post("/article/switchIsTop", { articleId, isTop })
-export const uploadArticleApi = (article: any) =>
+export const uploadArticleApi = (article: IArticle) =>
   request.post("/article/uploadArticle", article)
-export const updateArticleApi = (article: any) =>
+export const updateArticleApi = (article: IArticle) =>
   request.post("/article/updateArticle", article)
-export const getArticleByIdApi = (articleId: any) =>
+export const getArticleByIdApi = (articleId: number) =>
   request.get(`/article/getArticleById/${articleId}`)

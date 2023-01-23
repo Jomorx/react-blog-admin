@@ -1,53 +1,44 @@
-import React, { useState } from "react"
+import React from "react"
 import PageHeader from "@/component/PageHeader"
 import { Pagination, Table } from "antd"
 import ButtonHeader from "@/component/ButtonHeader"
 import ModalForm from "@/component/ModalForm"
 import {
-  IFriendChain,
-  deleteFriendChainListApi,
-  editFriendChainApi,
-  getFriendChainListApi,
-  insertFriendChainApi
-} from "@/api/friendChain"
+  deleteLogListApi,
+  editLogApi,
+  getLogListApi,
+  insertLogApi
+} from "@/api/log"
 import { useModal, useTable } from "@/hooks"
 import { modalConfig } from "./modal.config"
-import { tableConfig } from "./table.config"
-function Links() {
+import { IProject } from "@/api/project"
+import tableConfig from "./table.config"
+function Log() {
   const {
+    flushTable,
     tableInfo,
     setTableInfo,
-    flushTable,
     rowSelection,
     batchDelete,
-    onSearch
-  } = useTable<IFriendChain>(getFriendChainListApi, deleteFriendChainListApi)
-  const { addClick, visible, modalInfo, editClick } = useModal(
-    "友链",
-    "friendChainId",
-    flushTable,
-    insertFriendChainApi,
-    editFriendChainApi,
-    modalConfig
-  )
-
-  const columns = tableConfig(flushTable, editClick)
-  columns.forEach((item) => {
-    item.align = "center"
-  })
+    onSearch,
+    selectedRowKeys
+  } = useTable<IProject>(getLogListApi, deleteLogListApi)
+  const { visible, modalInfo, addClick, editClick } =
+    useModal("项目", "projectId", flushTable, insertLogApi, editLogApi, modalConfig)
+  const columns = tableConfig({editClick,batchDelete})
 
   return (
     <>
-      <PageHeader title="友链管理" />
+      <PageHeader title="项目管理" />
       <ButtonHeader
-        batchDelete={batchDelete}
+        batchDelete={()=>batchDelete(selectedRowKeys as number[] )}
         newAdd={addClick}
-        placeHolder="请输入友链名"
+        placeHolder="请输入项目名"
         onSearch={onSearch}
       ></ButtonHeader>
       <Table
         bordered
-        rowKey="friendChainId"
+        rowKey="logId"
         rowSelection={rowSelection}
         columns={columns}
         dataSource={tableInfo.data}
@@ -61,18 +52,16 @@ function Links() {
           showQuickJumper
           showTotal={(total) => `Total ${total} items`}
           onChange={(page, pageSize) => {
-            console.log(page)
             setTableInfo((e) => {
               return { ...e, pageSize, currentPage: page }
             })
           }}
-          // defaultCurrent={tableInfo.currentPage}
           current={tableInfo.currentPage}
         />
       </div>
-      <ModalForm visible={visible} ModalInfo={modalInfo!}></ModalForm>
+      <ModalForm visible={visible} ModalInfo={modalInfo}></ModalForm>
     </>
   )
 }
 
-export default Links
+export default Log

@@ -6,10 +6,9 @@ const CategoryManage = lazy(() => import("@/pages/Article/CategoryManage"))
 const TagManage = lazy(() => import("@/pages/Article/TagManage"))
 const ArticlePublish = lazy(() => import("@/pages/Article/ArticlePublish"))
 const ArticleList = lazy(() => import("@/pages/Article/ArticleList"))
-const ProjectPublish = lazy(() => import("@/pages/Project/ProjectPublish"))
-const ProjectList = lazy(() => import("@/pages/Project/ProjectList"))
+const Project = lazy(() => import("@/pages/Project"))
 
-const Links = lazy(() => import("@/pages/Links"))
+const Links = lazy(() => import("@/pages/FriendChain"))
 const NotFound = lazy(() => import("@/pages/404"))
 const Login = lazy(() => import("@/pages/Login"))
 const Config = lazy(() => import("@/pages/Config"))
@@ -17,16 +16,23 @@ const Config = lazy(() => import("@/pages/Config"))
 import { FileTextOutlined, GlobalOutlined } from "@ant-design/icons"
 import { RouteItem } from "./types"
 import Log from "@/pages/Log"
+import { Navigate } from "react-router-dom"
 
 const router: RouteItem[] = [
   {
     element: <Layout />,
-    key:"/",
+    key: "/",
     path: "/",
     children: [
       {
+        index: true,
+        element: <Navigate to={"/dashboard"}></Navigate>,
+        key: "/",
+        path: "/"
+      },
+      {
         element: <Dashboard />,
-        path: "/dashboard",
+        path: "dashboard",
         key: "/dashboard",
         icon: <GlobalOutlined />,
         label: "控制台"
@@ -72,22 +78,7 @@ const router: RouteItem[] = [
         icon: <FileTextOutlined />,
         label: "作品管理",
         key: "/project",
-        children: [
-          {
-            path: "project-publish/:id",
-            element: <ProjectPublish />,
-            key: "/project/project-publish/-1",
-            icon: <FileTextOutlined />,
-            label: "发布作品"
-          },
-          {
-            path: "project-list",
-            element: <ProjectList />,
-            key: "/project/project-list",
-            icon: <FileTextOutlined />,
-            label: "作品列表"
-          }
-        ]
+        element:<Project />
       },
       {
         element: <Links />,

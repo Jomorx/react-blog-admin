@@ -1,29 +1,31 @@
 import * as echarts from "echarts"
 import React, { useEffect, useRef } from "react"
-import { initEchart } from "@/component/MoChart"
+import { initEchart } from "@/base-ui/MoChart"
 
 type IProps = {
-  options?: echarts.EChartsOption
+  options: echarts.EChartsOption
   width?: string
   height?: string
 }
 const MoChart: React.FC<IProps> = ({
   options,
   width = "100%",
-  height = "400px"
+  height = "300px"
 }) => {
   const echartRef = useRef<HTMLDivElement>(null)
-
   useEffect(() => {
-    const { setOptions, updateSize } = initEchart(echartRef.current!)
-    if (options?.series !== undefined) {
+    // console.log(options.series[0].data);
+
+    if (options.series[0].data !== undefined) {
+      const { setOptions, updateSize } = initEchart(
+        echartRef.current as HTMLDivElement
+      )
+
       setOptions(options)
       window.addEventListener("resize", updateSize)
-      console.log(123);
-
+      return () => window.removeEventListener("resize", updateSize)
     }
-    return () => window.removeEventListener("resize", updateSize)
-  }, [options])
+  }, [options.series[0].data,options])
   return <div ref={echartRef} style={{ width, height }} />
 }
 

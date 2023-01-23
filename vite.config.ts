@@ -1,4 +1,4 @@
-import { defineConfig, loadEnv } from "vite"
+import { defineConfig } from "vite"
 import viteBaseConfig from "./config/vite.base.config"
 import viteProdConfig from "./config/vite.prod.config"
 import viteDevConfig from "./config/vite.dev.config"
@@ -14,7 +14,7 @@ const envResolver = {
   }
 }
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ command }) => {
   // 是build 还是serve主要取决于我们敲的命令是开启开发环境还是生产环境
   // console.log("process", process.cwd());
   // 当前env文件所在的目录

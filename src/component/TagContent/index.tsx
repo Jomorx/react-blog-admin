@@ -3,7 +3,8 @@ import { FormItem } from "@/component/ModalForm/types"
 import { Button, Popover, Tag } from "antd"
 import React, { useEffect, useState } from "react"
 import { ITag } from "@/api/tag"
-const TagContent = (item: FormItem, form: any) => {
+import { FormInstance } from "antd/lib/form/Form"
+const TagContent = ( form: FormInstance,item: FormItem) => {
   const [data, setData] = useState<ITag[]>([])
   const [value, setValue] = useState<ITag[]>([])
   const [selected, setSelected] = useState<number[]>([])
@@ -18,7 +19,7 @@ const TagContent = (item: FormItem, form: any) => {
             return (
               <Tag
                 key={item.tagId}
-                onClick={(e) => {
+                onClick={() => {
                   setSelected([...selected, item.tagId])
                   setValue([...value, item])
                   form.setFieldValue("tags", [...value, item])

@@ -1,14 +1,9 @@
-import { deleteLogListApi, editLogApi, ILog } from "@/api/log"
+import { ILog } from "@/api/log"
 import OperationButton from "@/component/OperationButton"
+import { ITableConfig } from "@/hooks/useTable/types"
 import { formatTime } from "@/utils"
-import { ColumnsType } from "antd/lib/table"
 import React from "react"
-const columns = (
-  setModalInfo: any,
-  setVisible: any,
-  flushTable: any,
-  editClick: any
-): ColumnsType<ILog> => {
+const LogTableConfig: ITableConfig<ILog> = ({ editClick, batchDelete }) => {
   return [
     {
       title: "设置名",
@@ -29,7 +24,7 @@ const columns = (
     {
       title: "操作",
       dataIndex: "operation",
-      render: (text, record, index) => {
+      render: (text, record) => {
         return (
           <>
             <OperationButton
@@ -37,8 +32,7 @@ const columns = (
                 editClick(record)
               }}
               clickDelete={async () => {
-                await deleteLogListApi([record.logId as number])
-                flushTable()
+                batchDelete([record.logId])
               }}
             />
           </>
@@ -48,4 +42,4 @@ const columns = (
     }
   ]
 }
-export default columns
+export default LogTableConfig

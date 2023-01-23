@@ -104,7 +104,7 @@ const ArticlePublish = () => {
 
   const init = async () => {
     if (param.id !== "-1") {
-      const res = await getArticleByIdApi(param.id)
+      const res = await getArticleByIdApi(Number(param.id))
       setInitValue(res.data)
       setText(res.data.articleContent)
       setTitle(res.data.articleTitle)
