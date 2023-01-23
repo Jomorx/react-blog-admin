@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react"
 import { Card, Col, Row } from "antd"
 import { FileTextOutlined } from "@ant-design/icons"
 import request from "@/config"
-import { MoChart } from "@/base-ui/MoChart"
 import MoInfoCard from "./components/MoInfoCard"
 import { chartConfig } from "./chart.config"
+import { MoPieChart } from "@/component/Charts"
+import { MoRoseChart } from "@/component/Charts/MoRoseChart"
+import { switchChartToRender } from "@/component/Charts/utils/switchChartToRender"
+import { getChartApi } from "@/api/dashboard"
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true)
@@ -37,19 +40,19 @@ const Dashboard = () => {
   const initChartInfo = async () => {
     const {
       data: { tagData, categoryData }
-    } = await request("dashboard/getChartInfo")
-    chartList[0].option.series[0].data = tagData.map((item) => ({
-      value: item.count,
-      name: item.tag.tagName
+    } = await getChartApi()
+    chartList[0].data = tagData.map(({ count, tag }) => ({
+      value: count,
+      name: tag.tagName
     }))
-    chartList[1].option.series[0].data = categoryData.map((item:any) => ({
-      value: item.count,
-      name: item.category.categoryName
+    chartList[1].data = categoryData.map(({ count, category }) => ({
+      value: count,
+      name: category.categoryName
     }))
-    setChartList([...chartList])
+    console.log(chartList);
 
+    setChartList([...chartList])
   }
-  // const init = [initCardInfo, initChartInfo]
   useEffect(() => {
     initCardInfo()
     initChartInfo()
@@ -70,7 +73,9 @@ const Dashboard = () => {
               loading={loading}
               hoverable
             >
-              <MoChart options={item.option} />
+              {
+                switchChartToRender(item)
+              }
             </Card>
           </Col>
         ))}

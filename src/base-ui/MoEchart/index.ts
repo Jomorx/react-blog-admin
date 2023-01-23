@@ -1,3 +1,3 @@
-export { default as MoChart } from "./src/MoChart"
+export { default as MoEchart } from "./src/MoEchart"
 export * from "./src/types"
 export * from "./hooks/initEchart"

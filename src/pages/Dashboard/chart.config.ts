@@ -1,57 +1,17 @@
-import { EChartsOption } from "echarts"
+import { IChartConfig } from "@/component/Charts";
 
-export const chartConfig: {
-  title: string
-  option: EChartsOption
-}[] = [
+export const chartConfig: IChartConfig[] = [
   {
     title: "标签文章数量",
-    option: {
-      series: [
-        {
-          name: "articleTagCount",
-          type: "pie",
-          data: undefined,
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: "rgba(0, 0, 0, 0.5)"
-            }
-          }
-        }
-      ],
-      tooltip: {}
-    }
+    type: "pie",
+    name: "articleTagCount",
+    data: undefined
   },
   {
-    title: "分类文章数量",
-    option: {
-      series: [
-        {
-          type: "pie",
-          data: undefined,
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: "rgba(0, 0, 0, 0.5)"
-            },
-            label: {
-              show: true,
-              fontSize: 30,
-              fontWeight: "bold"
-            }
-          },
-          radius: ["40%", "70%"]
-          // label: {
-          //   show: true,
-          //   position: "center"
-          // }
-        }
-      ],
-      tooltip: {}
-    }
+    title: "标签文章数量",
+    type: "rose",
+    name: "articleTagCount",
+    data: undefined
   }
   // {
   //   title: "文章访问排行",
