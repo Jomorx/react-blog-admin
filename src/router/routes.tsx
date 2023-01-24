@@ -78,7 +78,7 @@ const router: RouteItem[] = [
         icon: <FileTextOutlined />,
         label: "作品管理",
         key: "/project",
-        element:<Project />
+        element: <Project />
       },
       {
         element: <Links />,

@@ -13,7 +13,7 @@ const App: React.FC<{ src?: string; form: FormInstance; item: FormItem }> = (
     name: "file",
     multiple: false,
     action: `${import.meta.env.ENV_BASEURL}/upload`,
-    onChange(info:any) {
+    onChange(info: any) {
       const { status } = info.file
       if (status === "done") {
         message.success(`${info.file.name} file uploaded successfully.`)
@@ -22,7 +22,7 @@ const App: React.FC<{ src?: string; form: FormInstance; item: FormItem }> = (
       } else if (status === "error") {
         message.error(`${info.file.name} file upload failed.`)
       }
-    },
+    }
   }
 
   return (

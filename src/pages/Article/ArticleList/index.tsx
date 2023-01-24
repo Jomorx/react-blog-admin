@@ -5,7 +5,7 @@ import {
 } from "@/api/article"
 import { useTable } from "@/hooks"
 import { Button, Table, Pagination } from "antd"
-import React  from "react"
+import React from "react"
 import { useNavigate } from "react-router-dom"
 import PageHeader from "../../../component/PageHeader"
 import articleTableConfig from "./table.config"
@@ -21,7 +21,10 @@ function ArticleList() {
   } = useTable<IArticle>(getArticleListApi, deleteArticleListApi)
   const navigate = useNavigate()
 
-  const columns = articleTableConfig({batchDelete,editClick:navigate as any})
+  const columns = articleTableConfig({
+    batchDelete,
+    editClick: navigate as any
+  })
   //元素居中
   columns.forEach((item) => {
     item.align = "center"
@@ -34,7 +37,7 @@ function ArticleList() {
       <div style={{ marginBottom: 16 }}>
         <Button
           type="primary"
-          onClick={()=>batchDelete(selectedRowKeys as number[])}
+          onClick={() => batchDelete(selectedRowKeys as number[])}
           disabled={rowSelection.selectedRowKeys.length === 0}
           danger
         >

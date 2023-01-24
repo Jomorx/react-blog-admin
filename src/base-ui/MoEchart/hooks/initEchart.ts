@@ -9,7 +9,7 @@ export const initEchart = (el: HTMLDivElement) => {
   const updateSize = () => {
     echartInstance.resize()
   }
-  const destoryEchart = ()=>echartInstance.dispose()
+  const destoryEchart = () => echartInstance.dispose()
   return {
     echartInstance,
     setOptions,

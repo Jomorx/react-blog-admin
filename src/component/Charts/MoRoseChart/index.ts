@@ -1,3 +1,2 @@
-export {default as MoRoseChart} from "./MoPieChart"
+export { default as MoRoseChart } from "./MoPieChart"
 export * from "./types"
-

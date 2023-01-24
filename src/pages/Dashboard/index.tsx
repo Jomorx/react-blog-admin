@@ -39,7 +39,7 @@ const Dashboard = () => {
   }
   const initChartInfo = async () => {
     const {
-      data: { tagData, categoryData }
+      data: { tagData, categoryData, articleData }
     } = await getChartApi()
     chartList[0].data = tagData.map(({ count, tag }) => ({
       value: count,
@@ -49,7 +49,12 @@ const Dashboard = () => {
       value: count,
       name: category.categoryName
     }))
-    console.log(chartList);
+    chartList[2].data = articleData.map(({ viewCount }) => viewCount)
+    chartList[2].xAxis!.data = articleData.map(({ articleTitle }) =>
+      articleTitle.slice(0, 4)
+    )
+
+    console.log(chartList)
 
     setChartList([...chartList])
   }
@@ -73,9 +78,7 @@ const Dashboard = () => {
               loading={loading}
               hoverable
             >
-              {
-                switchChartToRender(item)
-              }
+              {switchChartToRender(item)}
             </Card>
           </Col>
         ))}

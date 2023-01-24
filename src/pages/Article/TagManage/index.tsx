@@ -33,7 +33,7 @@ function TagManage() {
     modalConfig
   )
 
-  const columns = tagTableConfig({editClick,batchDelete})
+  const columns = tagTableConfig({ editClick, batchDelete })
   columns.forEach((item) => {
     item.align = "center"
   })
@@ -42,7 +42,7 @@ function TagManage() {
     <>
       <PageHeader title="标签管理" />
       <ButtonHeader
-        batchDelete={()=>batchDelete(selectedRowKeys as number[])}
+        batchDelete={() => batchDelete(selectedRowKeys as number[])}
         newAdd={addClick}
         placeHolder="请输入标签名"
         onSearch={onSearch}

@@ -6,5 +6,5 @@ export type IArticle = {
   category: number
   viewCount: number
   isTop: number
-  tagList: {tagId:number,tagName:string}[]
+  tagList: { tagId: number; tagName: string }[]
 }

@@ -12,15 +12,15 @@ const MoRoseChart: React.FC<{ data: IEchartData[]; name: string }> = ({
       // legend: {
       //   top: 'bottom'
       // },
-      toolbox: {
-        show: true,
-        feature: {
-          mark: { show: true },
-          dataView: { show: true, readOnly: false },
-          restore: { show: true },
-          saveAsImage: { show: true }
-        }
-      },
+      // toolbox: {
+      //   show: true,
+      //   feature: {
+      //     mark: { show: true },
+      //     dataView: { show: true, readOnly: false },
+      //     restore: { show: true },
+      //     saveAsImage: { show: true }
+      //   }
+      // },
       series: [
         {
           type: "pie",

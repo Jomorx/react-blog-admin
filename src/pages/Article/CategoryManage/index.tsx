@@ -32,7 +32,7 @@ function CategoryManage() {
     modalConfig
   )
 
-  const columns = categoryTableConfig({editClick,batchDelete})
+  const columns = categoryTableConfig({ editClick, batchDelete })
   columns.forEach((item) => {
     item.align = "center"
   })
@@ -41,7 +41,7 @@ function CategoryManage() {
     <>
       <PageHeader title="分类管理" />
       <ButtonHeader
-        batchDelete={()=>batchDelete(selectedRowKeys as number[])}
+        batchDelete={() => batchDelete(selectedRowKeys as number[])}
         newAdd={addClick}
         placeHolder="请输入分类名"
         onSearch={onSearch}

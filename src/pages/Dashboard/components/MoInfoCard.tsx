@@ -2,7 +2,8 @@ import { Card, Col, Row } from "antd"
 import React from "react"
 
 const MoInfoCard: React.FC<{ loading: boolean; cardList: any[] }> = ({
-  loading,cardList
+  loading,
+  cardList
 }) => {
   return (
     <Row gutter={24}>
@@ -12,8 +13,8 @@ const MoInfoCard: React.FC<{ loading: boolean; cardList: any[] }> = ({
             className="gutter-row"
             xs={24}
             md={12}
-            xl={8}
-            xxl={6}
+            lg={8}
+            xl={6}
             key={item.title}
           >
             <Card

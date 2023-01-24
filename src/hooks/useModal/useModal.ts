@@ -5,8 +5,8 @@ export const useModal = (
   title: string,
   tableId: string,
   flushTable: () => void,
-  insertDataApi: (value:any) => void,
-  editDataApi: (value:any) => void,
+  insertDataApi: (value: any) => void,
+  editDataApi: (value: any) => void,
   formItem: ModalInfoType["formItem"]
 ) => {
   const [modalInfo, setModalInfo] = useState<ModalInfoType>({

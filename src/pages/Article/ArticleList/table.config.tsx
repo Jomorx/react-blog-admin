@@ -37,7 +37,7 @@ const articleTableConfig: ITableConfig<IArticle> = ({
   {
     title: "标签",
     dataIndex: "tagList",
-    render: (list:IArticle["tagList"]) => {
+    render: (list: IArticle["tagList"]) => {
       return list.map((item) => {
         return (
           <Tag key={item.tagId} color={"#2db7f5"}>

@@ -1,10 +1,13 @@
 import { IProject } from "@/api/project"
 import OperationButton from "@/component/OperationButton"
-import {  ITableConfig } from "@/hooks/useTable/types"
+import { ITableConfig } from "@/hooks/useTable/types"
 import { formatTime } from "@/utils"
 import React from "react"
 
-const ProjectTableConfig: ITableConfig<IProject> = ({ editClick, batchDelete }) => {
+const ProjectTableConfig: ITableConfig<IProject> = ({
+  editClick,
+  batchDelete
+}) => {
   return [
     {
       title: "项目图片",

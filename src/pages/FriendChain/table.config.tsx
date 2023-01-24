@@ -3,7 +3,10 @@ import { IFriendChain } from "@/api/friendChain"
 import { formatTime } from "@/utils"
 import OperationButton from "@/component/OperationButton"
 import { ITableConfig } from "@/hooks/useTable/types"
- const friendChainTableConfig:ITableConfig<IFriendChain> = ({editClick,batchDelete}) => [
+const friendChainTableConfig: ITableConfig<IFriendChain> = ({
+  editClick,
+  batchDelete
+}) => [
   {
     title: "友链名",
     dataIndex: "friendChainName",
@@ -56,7 +59,7 @@ import { ITableConfig } from "@/hooks/useTable/types"
             clickEdit={() => {
               editClick(record)
             }}
-            clickDelete={ () => {
+            clickDelete={() => {
               batchDelete([record.friendChainId])
             }}
           />

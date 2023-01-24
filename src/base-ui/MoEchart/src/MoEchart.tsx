@@ -17,8 +17,6 @@ const MoEchart: React.FC<IProps> = ({
     const { setOptions, updateSize, destoryEchart } = initEchart(
       echartRef.current as HTMLDivElement
     )
-    console.log(option)
-
     setOptions(option)
     window.addEventListener("resize", updateSize)
     return () => {

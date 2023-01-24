@@ -4,7 +4,7 @@ import { Button, Popover, Tag } from "antd"
 import React, { useEffect, useState } from "react"
 import { ITag } from "@/api/tag"
 import { FormInstance } from "antd/lib/form/Form"
-const TagContent = ( form: FormInstance,item: FormItem) => {
+const TagContent = (form: FormInstance, item: FormItem) => {
   const [data, setData] = useState<ITag[]>([])
   const [value, setValue] = useState<ITag[]>([])
   const [selected, setSelected] = useState<number[]>([])
@@ -44,7 +44,9 @@ const TagContent = ( form: FormInstance,item: FormItem) => {
 
   useEffect(() => {
     setValue(item.initialValue ?? [])
-    setSelected(item.initialValue?item.initialValue.map((item: ITag) => item.tagId):[])
+    setSelected(
+      item.initialValue ? item.initialValue.map((item: ITag) => item.tagId) : []
+    )
   }, [item.initialValue])
   return (
     <>

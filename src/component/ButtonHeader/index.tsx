@@ -7,7 +7,11 @@ interface IProps {
   placeHolder: string
   onSearch: (value: string, event: IChangeEvent) => void
 }
-type IChangeEvent = React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLElement, MouseEvent> | React.KeyboardEvent<HTMLInputElement> | undefined
+type IChangeEvent =
+  | React.ChangeEvent<HTMLInputElement>
+  | React.MouseEvent<HTMLElement, MouseEvent>
+  | React.KeyboardEvent<HTMLInputElement>
+  | undefined
 const index: React.FC<IProps> = ({
   batchDelete,
   newAdd,

@@ -32,7 +32,7 @@ function FriendChian() {
     modalConfig
   )
 
-  const columns = friendChainTableConfig({editClick,batchDelete})
+  const columns = friendChainTableConfig({ editClick, batchDelete })
   columns.forEach((item) => {
     item.align = "center"
   })
@@ -41,7 +41,7 @@ function FriendChian() {
     <>
       <PageHeader title="友链管理" />
       <ButtonHeader
-        batchDelete={()=>batchDelete(selectedRowKeys as number[])}
+        batchDelete={() => batchDelete(selectedRowKeys as number[])}
         newAdd={addClick}
         placeHolder="请输入友链名"
         onSearch={onSearch}

@@ -21,6 +21,6 @@ module.exports = {
     "no-empty-source": null,
     // 禁止缺少文件末尾的换行符
     "no-missing-end-of-source-newline": null,
-    "string-quotes":"double"
+    "string-quotes": "double"
   }
 }

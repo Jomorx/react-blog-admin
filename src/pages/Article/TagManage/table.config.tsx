@@ -3,10 +3,7 @@ import { ITag } from "@/api/tag"
 import OperationButton from "@/component/OperationButton"
 import { formatTime } from "@/utils"
 import { ITableConfig } from "@/hooks/useTable/types"
- const tagTableConfig: ITableConfig<ITag> = ({
-  editClick,
-  batchDelete
-}) => {
+const tagTableConfig: ITableConfig<ITag> = ({ editClick, batchDelete }) => {
   return [
     {
       title: "标签名",

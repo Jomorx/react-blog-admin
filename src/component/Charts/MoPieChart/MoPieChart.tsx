@@ -3,8 +3,11 @@ import { MoEchart } from "@/base-ui/MoEchart"
 import { IEchartData } from "../types"
 import { EChartsOption } from "echarts"
 
-const MoPieChart:React.FC<{data:IEchartData[],name:string}> = ({data,name}) => {
-  const option:EChartsOption = useMemo(() => {
+const MoPieChart: React.FC<{ data: IEchartData[]; name: string }> = ({
+  data,
+  name
+}) => {
+  const option: EChartsOption = useMemo(() => {
     return {
       tooltip: {
         trigger: "item"

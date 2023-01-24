@@ -1,6 +1,5 @@
 import moment from "moment"
 
-
 //全屏
 export const fullScreen = () => {
   const el = document.documentElement
@@ -15,7 +14,6 @@ export const formatTime = (time: Date) => {
   return moment(time).format("YYYY-MM-DD")
 }
 
-export const getToken = (): string|null => localStorage.getItem("token")
+export const getToken = (): string | null => localStorage.getItem("token")
 export const setToken = (token: string) => localStorage.setItem("token", token)
 export const removeToken = () => localStorage.removeItem("token")
-

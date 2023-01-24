@@ -7,4 +7,4 @@ export interface DataType<T> {
   count: number
   rows: T[]
 }
-export type IPageData<T> =ReturnType<DataType<T>>
+export type IPageData<T> = ReturnType<DataType<T>>

@@ -23,8 +23,14 @@ function Log() {
     onSearch,
     selectedRowKeys
   } = useTable<ILog>(getLogListApi, deleteLogListApi)
-  const { visible, modalInfo, addClick, editClick } =
-    useModal("日志", "logId", flushTable, insertLogApi, editLogApi, modalConfig)
+  const { visible, modalInfo, addClick, editClick } = useModal(
+    "日志",
+    "logId",
+    flushTable,
+    insertLogApi,
+    editLogApi,
+    modalConfig
+  )
 
   const columns = useColumns({ editClick, batchDelete })
 

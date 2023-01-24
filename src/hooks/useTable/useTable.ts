@@ -48,6 +48,6 @@ export const useTable = <T>(
     selectedRowKeys,
     rowSelection,
     batchDelete,
-    onSearch,
+    onSearch
   }
 }

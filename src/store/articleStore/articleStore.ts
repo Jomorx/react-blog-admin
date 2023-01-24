@@ -5,8 +5,8 @@ import { IArticleState } from "./types"
 
 const initialState: IArticleState = {
   articleList: {
-    count:0,
-    rows:[]
+    count: 0,
+    rows: []
   }
 }
 const articleStore = createSlice({
@@ -14,11 +14,11 @@ const articleStore = createSlice({
   initialState,
   reducers: {
     changeArticleListAction(state, { payload }) {
-      if(payload.count!==state.articleList.count){
+      if (payload.count !== state.articleList.count) {
         state.articleList.count = payload.count
-        state.articleList.rows =payload.rows
-      }else{
-        state.articleList.rows =state.articleList.rows.concat(payload.rows)
+        state.articleList.rows = payload.rows
+      } else {
+        state.articleList.rows = state.articleList.rows.concat(payload.rows)
       }
     }
   }

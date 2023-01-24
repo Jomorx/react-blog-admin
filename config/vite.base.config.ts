@@ -8,7 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@var": path.resolve(__dirname, "../src/base"),
-        "@": path.resolve(__dirname, "../src")
+      "@": path.resolve(__dirname, "../src")
     }
   },
 
@@ -19,7 +19,7 @@ export default defineConfig({
   //   exclude: [] // 将指定数组中的依赖不进行依赖预构建
   // },
   envPrefix: "ENV_",
-  envDir: "env",
+  envDir: "env"
   // css:{
   //     preprocessorOptions:{
   //         less:{
