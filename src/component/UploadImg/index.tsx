@@ -1,49 +1,47 @@
-import { InboxOutlined } from "@ant-design/icons"
-import { FormInstance, message, Upload } from "antd"
-import React, { useState } from "react"
+import { FormInstance } from "antd"
+import React, { useRef, useState } from "react"
 import { FormItem } from "../ModalForm/types"
-const { Dragger } = Upload
-
+import { uploadImageApi } from "@/api/upload"
 const App: React.FC<{ src?: string; form: FormInstance; item: FormItem }> = (
   props
 ) => {
   const [src, setSrc] = useState<string | undefined>(props.src)
+  const inputRef = useRef<HTMLInputElement>(null)
+  // 转换为base64
+  const changeBASE64 = (file: File) =>
+    new Promise<string>((resolve) => {
+      const fileReader = new FileReader()
+      fileReader.readAsDataURL(file)
+      fileReader.onload = (ev) => resolve(ev.target?.result as string)
+    })
+  const onChange = async (e: any) => {
+    console.log(e.target)
 
-  const config = {
-    name: "file",
-    multiple: false,
-    action: `${import.meta.env.ENV_BASEURL}/upload`,
-    onChange(info: any) {
-      const { status } = info.file
-      if (status === "done") {
-        message.success(`${info.file.name} file uploaded successfully.`)
-        setSrc(info.file.response[0].src)
-        props.form.setFieldValue(props.item.name, info.file.response[0].src)
-      } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`)
-      }
-    }
+    const originFile = e.target.files[0]
+    const fileBase64 = await changeBASE64(originFile)
+    const file = encodeURIComponent(fileBase64)
+    const res = await uploadImageApi({ file, fileName: originFile.name })
+    setSrc(res.data.url)
+    props.form.setFieldValue(props.item.name, res.data.url)
   }
-
   return (
-    <Dragger {...config} maxCount={1}>
+    <>
       {src ? (
-        <img src={props.src} style={{ width: "390px", height: "141px" }} />
+        <img
+          src={props.src}
+          onClick={() => inputRef.current?.click()}
+          style={{ width: "390px", height: "141px" }}
+        />
       ) : (
-        <>
-          <p className="ant-upload-drag-icon">
-            <InboxOutlined />
-          </p>
-          <p className="ant-upload-text">
-            Click or drag file to this area to upload
-          </p>
-          <p className="ant-upload-hint">
-            Support for a single or bulk upload. Strictly prohibit from
-            uploading company data or other band files
-          </p>
-        </>
+        <div onClick={() => inputRef.current?.click()}>点我</div>
       )}
-    </Dragger>
+      <input
+        onChange={onChange}
+        type="file"
+        style={{ display: "none" }}
+        ref={inputRef}
+      />
+    </>
   )
 }
 export default App
