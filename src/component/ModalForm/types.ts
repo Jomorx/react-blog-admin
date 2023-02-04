@@ -4,7 +4,13 @@ import { ReactNode } from "react"
 export interface FormItem {
   name: string
   label: string
-  type: "input" | "textarea" | "upload" | "ButtonWithPopover" | "switch"
+  type:
+    | "input"
+    | "textarea"
+    | "upload"
+    | "ButtonWithPopover"
+    | "switch"
+    | "color"
   rules: {
     required: boolean
     message?: string

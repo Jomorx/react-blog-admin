@@ -20,6 +20,22 @@ const tagTableConfig: ITableConfig<ITag> = ({ editClick, batchDelete }) => {
       }
     },
     {
+      title: "标签颜色",
+      dataIndex: "tagColor",
+      render: (tagColor) => {
+        return (
+          <div
+            style={{
+              background: tagColor,
+              width: "30px",
+              height: "30px",
+              margin:"0 auto"
+            }}
+          ></div>
+        )
+      }
+    },
+    {
       title: "创建时间",
       dataIndex: "createdAt",
       render: (createdAt) => {

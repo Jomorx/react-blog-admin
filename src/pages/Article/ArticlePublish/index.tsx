@@ -14,6 +14,7 @@ import {
 } from "@/api/article/ArticleApi"
 import { useParams } from "react-router-dom"
 import { IArticle } from "@/api/article"
+import { uploadImageUtil } from "@/utils/upload"
 
 const ArticlePublish = () => {
   const [title, setTitle] = useState("")
@@ -144,7 +145,14 @@ const ArticlePublish = () => {
           发布文章
         </Button>
       </div>
-      <MdEditor modelValue={text} onChange={setText} />
+      <MdEditor
+        onUploadImg={async (e, cb) => {
+          const res = await uploadImageUtil(e[0])
+          cb([res.data.url])
+        }}
+        modelValue={text}
+        onChange={setText}
+      />
       <ModalForm visible={visible} ModalInfo={modalInfo}></ModalForm>
     </>
   )

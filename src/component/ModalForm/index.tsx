@@ -1,6 +1,7 @@
 import { Form, Input, Modal, Switch } from "antd"
 import { FormInstance } from "antd/lib/form/Form"
 import React from "react"
+import { ColorSelector } from "../ColorSelector"
 import UploadImg from "../UploadImg"
 import { FormItem, ModalInfoType } from "./types"
 interface IProps {
@@ -23,6 +24,9 @@ const switchRender = (type: string, item: FormItem, form: FormInstance) => {
     }
     case "switch": {
       return <Switch />
+    }
+    case "color" :{
+      return <ColorSelector item={item} form={form}/>
     }
   }
 }
