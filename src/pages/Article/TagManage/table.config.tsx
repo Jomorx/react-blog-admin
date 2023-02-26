@@ -29,7 +29,7 @@ const tagTableConfig: ITableConfig<ITag> = ({ editClick, batchDelete }) => {
               background: tagColor,
               width: "30px",
               height: "30px",
-              margin:"0 auto"
+              margin: "0 auto"
             }}
           ></div>
         )

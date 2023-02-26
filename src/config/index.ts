@@ -1,3 +1,4 @@
+import { getUserInfo, removeUserInfo } from "@/utils"
 import { notification } from "antd"
 import axios, { AxiosInstance } from "axios"
 import nprogress from "nprogress"
@@ -34,7 +35,7 @@ const openNotificationWithIcon = (
 request.interceptors.request.use((config) => {
   nprogress.start()
   // config.headers!["Content-Type"] = "application/json;charset=utf-8";
-  config.headers!.token = ""
+  config.headers!.Authorization = getUserInfo().token
   return config
 })
 
@@ -50,6 +51,10 @@ request.interceptors.response.use(
 
   (err) => {
     openNotificationWithIcon("error", err.response.data.message)
+    if(err.response.data.code===403){
+      removeUserInfo()
+    }
+
     return Promise.reject(err)
   }
 )

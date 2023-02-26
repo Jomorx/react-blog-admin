@@ -5,19 +5,32 @@ import {
   MenuUnfoldOutlined,
   ExpandOutlined
 } from "@ant-design/icons"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
 import style from "./index.module.less"
 const { Header, Sider, Content } = Layout
-import { fullScreen } from "@/utils"
+import { fullScreen, getUserInfo, removeUserInfo } from "@/utils"
 import { Suspense } from "react"
 import { menuItems } from "@/utils/menu"
 import { ItemType } from "antd/es/menu/hooks/useItems"
+import { useAppDispatch, useAppSelector } from "@/hooks"
+import { initUserAction, removeUserAction } from "@/store/userStore"
 
 const ManageLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
+  const appDispatch = useAppDispatch()
+  const userStore = useAppSelector((store) => store.userStore)
+  const handleLogOut = () => {
+    removeUserInfo()
+    appDispatch(removeUserAction())
+    navigate("/login")
+  }
+  useEffect(() => {
+    const { account, nickname } = getUserInfo()
+    appDispatch(initUserAction({ account, nickname }))
+  }, [])
   return (
     <Layout className={style.layout}>
       <div
@@ -73,9 +86,15 @@ const ManageLayout: React.FC = () => {
               }}
             />
             <Popover
-              content={<div style={{ cursor: "pointer" }}>退出登录</div>}
+              content={
+                <div style={{ cursor: "pointer" }} onClick={handleLogOut}>
+                  退出登录
+                </div>
+              }
             >
-              <Avatar>U</Avatar>
+              <Avatar style={{ cursor: "pointer" }}>
+                {userStore.userInfo.nickname}
+              </Avatar>
             </Popover>
           </div>
         </Header>

@@ -1,12 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { articleStore } from "./articleStore"
+import { userStore } from "./userStore"
+
 const store = configureStore({
   reducer: {
-    articleStore
+    articleStore,
+    userStore
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false
+      serializableCheck: true
     })
 })
 export default store

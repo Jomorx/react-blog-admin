@@ -25,8 +25,8 @@ const switchRender = (type: string, item: FormItem, form: FormInstance) => {
     case "switch": {
       return <Switch />
     }
-    case "color" :{
-      return <ColorSelector item={item} form={form}/>
+    case "color": {
+      return <ColorSelector item={item} form={form} />
     }
   }
 }

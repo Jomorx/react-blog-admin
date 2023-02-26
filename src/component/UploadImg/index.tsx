@@ -1,7 +1,6 @@
-import { FormInstance } from "antd"
+import { Button, FormInstance } from "antd"
 import React, { useRef, useState } from "react"
 import { FormItem } from "../ModalForm/types"
-import { uploadImageApi } from "@/api/upload"
 import { uploadImageUtil } from "@/utils/upload"
 const App: React.FC<{ src?: string; form: FormInstance; item: FormItem }> = (
   props
@@ -24,7 +23,7 @@ const App: React.FC<{ src?: string; form: FormInstance; item: FormItem }> = (
           style={{ width: "390px", height: "141px" }}
         />
       ) : (
-        <div onClick={() => inputRef.current?.click()}>点我</div>
+        <Button onClick={() => inputRef.current?.click()} type="primary">上传图片</Button>
       )}
       <input
         onChange={onChange}

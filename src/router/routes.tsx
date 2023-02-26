@@ -10,17 +10,23 @@ const Project = lazy(() => import("@/pages/Project"))
 
 const Links = lazy(() => import("@/pages/FriendChain"))
 const NotFound = lazy(() => import("@/pages/404"))
-const Login = lazy(() => import("@/pages/Login"))
+// const Login = () => import("@/pages/Login")
+import Login from "@/pages/Login"
 const Config = lazy(() => import("@/pages/Config"))
 
-import { FileTextOutlined, GlobalOutlined } from "@ant-design/icons"
+import { BulbOutlined, EditOutlined, FileTextOutlined, GlobalOutlined, LinkOutlined, ProjectOutlined } from "@ant-design/icons"
 import { RouteItem } from "./types"
 import Log from "@/pages/Log"
 import { Navigate } from "react-router-dom"
+import { LoginWrapper } from "@/wrapper"
 
 const router: RouteItem[] = [
   {
-    element: <Layout />,
+    element: (
+      <LoginWrapper>
+        <Layout />
+      </LoginWrapper>
+    ),
     key: "/",
     path: "/",
     children: [
@@ -47,35 +53,31 @@ const router: RouteItem[] = [
             path: "article-publish/:id",
             element: <ArticlePublish />,
             key: "/article/article-publish/-1",
-            icon: <FileTextOutlined />,
             label: "发布文章"
           },
           {
             path: "article-list",
             element: <ArticleList />,
             key: "/article/article-list",
-            icon: <FileTextOutlined />,
             label: "文章列表"
           },
           {
             path: "tag-manage",
             element: <TagManage />,
             key: "/article/tag-manage",
-            icon: <FileTextOutlined />,
             label: "标签管理"
           },
           {
             path: "category-manage",
             element: <CategoryManage />,
             key: "/article/category-manage",
-            icon: <FileTextOutlined />,
             label: "分类管理"
           }
         ]
       },
       {
         path: "/project",
-        icon: <FileTextOutlined />,
+        icon: <ProjectOutlined />,
         label: "作品管理",
         key: "/project",
         element: <Project />
@@ -84,21 +86,21 @@ const router: RouteItem[] = [
         element: <Links />,
         path: "/links",
         key: "/links",
-        icon: <GlobalOutlined />,
+        icon: <LinkOutlined />,
         label: "友链"
       },
       {
         element: <Log />,
         path: "/log",
         key: "/log",
-        icon: <GlobalOutlined />,
+        icon: <EditOutlined />,
         label: "网站日志"
       },
       {
         element: <Config />,
         path: "/config/:id",
         key: "/config/1",
-        icon: <GlobalOutlined />,
+        icon: <BulbOutlined />,
         label: "网站设置"
       }
     ]

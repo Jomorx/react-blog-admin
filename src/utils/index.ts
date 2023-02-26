@@ -13,7 +13,12 @@ export const formatTime = (time: Date) => {
   if (!time) return ""
   return moment(time).format("YYYY-MM-DD")
 }
-
-export const getToken = (): string | null => localStorage.getItem("token")
-export const setToken = (token: string) => localStorage.setItem("token", token)
-export const removeToken = () => localStorage.removeItem("token")
+export type UserInfo = {
+  account: string
+  nickname: string
+  token: string
+}
+export const getUserInfo = (): UserInfo=>
+  JSON.parse(localStorage.getItem("userInfo") || "{}")
+export const setUserInfo = (userInfo:UserInfo) => localStorage.setItem("userInfo", JSON.stringify(userInfo))
+export const removeUserInfo = () => localStorage.removeItem("userInfo")
