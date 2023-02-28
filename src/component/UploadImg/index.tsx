@@ -23,7 +23,9 @@ const App: React.FC<{ src?: string; form: FormInstance; item: FormItem }> = (
           style={{ width: "390px", height: "141px" }}
         />
       ) : (
-        <Button onClick={() => inputRef.current?.click()} type="primary">上传图片</Button>
+        <Button onClick={() => inputRef.current?.click()} type="primary">
+          上传图片
+        </Button>
       )}
       <input
         onChange={onChange}

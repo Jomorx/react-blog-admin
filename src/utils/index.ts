@@ -18,7 +18,8 @@ export type UserInfo = {
   nickname: string
   token: string
 }
-export const getUserInfo = (): UserInfo=>
+export const getUserInfo = (): UserInfo =>
   JSON.parse(localStorage.getItem("userInfo") || "{}")
-export const setUserInfo = (userInfo:UserInfo) => localStorage.setItem("userInfo", JSON.stringify(userInfo))
+export const setUserInfo = (userInfo: UserInfo) =>
+  localStorage.setItem("userInfo", JSON.stringify(userInfo))
 export const removeUserInfo = () => localStorage.removeItem("userInfo")

@@ -38,4 +38,4 @@ const articleStore = createSlice({
 //   }
 // })
 export default articleStore.reducer
-export const { initUserAction,removeUserAction } = articleStore.actions
+export const { initUserAction, removeUserAction } = articleStore.actions

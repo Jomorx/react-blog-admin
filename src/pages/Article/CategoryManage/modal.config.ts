@@ -35,7 +35,6 @@ export const modalConfig: ModalInfoType["formItem"] = [
     ],
     valuePropName: "src",
     getValueFromEvent: (e) => {
-      console.log("Upload event:", e.file.status)
       if (e.file.status === "done") {
         return e?.file.response[0].src
       }

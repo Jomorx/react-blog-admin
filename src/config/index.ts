@@ -51,7 +51,7 @@ request.interceptors.response.use(
 
   (err) => {
     openNotificationWithIcon("error", err.response.data.message)
-    if(err.response.data.code===403){
+    if (err.response.data.statusCode === 403) {
       removeUserInfo()
     }
 

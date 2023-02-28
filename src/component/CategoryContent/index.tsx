@@ -37,7 +37,8 @@ const CategoryContent = (form: FormInstance, item: FormItem) => {
   }, [])
   useEffect(() => {
     if (item.initialValue) {
-      setValue(item.initialValue.categoryId)
+      setValue(item.initialValue)
+
       form.setFieldValue("categoryId", item.initialValue.categoryId)
     }
   }, [item.initialValue, form])

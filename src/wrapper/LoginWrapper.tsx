@@ -1,6 +1,6 @@
 import { getUserInfo } from "@/utils"
 import { ReactNode, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useNavigate } from "react-router-dom"
 type IProps = {
   children: ReactNode
 }

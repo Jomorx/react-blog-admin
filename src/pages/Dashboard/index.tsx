@@ -54,7 +54,6 @@ const Dashboard = () => {
       articleTitle.slice(0, 4)
     )
 
-    console.log(chartList)
 
     setChartList([...chartList])
   }

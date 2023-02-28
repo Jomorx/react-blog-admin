@@ -62,7 +62,6 @@ function FriendChian() {
           showQuickJumper
           showTotal={(total) => `Total ${total} items`}
           onChange={(page, pageSize) => {
-            console.log(page)
             setTableInfo((e) => {
               return { ...e, pageSize, currentPage: page }
             })

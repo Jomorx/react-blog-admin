@@ -14,7 +14,14 @@ const NotFound = lazy(() => import("@/pages/404"))
 import Login from "@/pages/Login"
 const Config = lazy(() => import("@/pages/Config"))
 
-import { BulbOutlined, EditOutlined, FileTextOutlined, GlobalOutlined, LinkOutlined, ProjectOutlined } from "@ant-design/icons"
+import {
+  BulbOutlined,
+  EditOutlined,
+  FileTextOutlined,
+  GlobalOutlined,
+  LinkOutlined,
+  ProjectOutlined
+} from "@ant-design/icons"
 import { RouteItem } from "./types"
 import Log from "@/pages/Log"
 import { Navigate } from "react-router-dom"
