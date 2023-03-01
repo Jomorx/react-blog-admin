@@ -47,6 +47,7 @@ function Login() {
           }}
           placeholder="请输入账号"
           prefix={<UserOutlined />}
+          allowClear
         />
       </div>
       <div className={styles["form-item"]}>
@@ -58,6 +59,7 @@ function Login() {
             setManagerInfo((prev) => ({ ...prev, password: e.target.value }))
           }}
           prefix={<LockOutlined />}
+          allowClear
         />
       </div>
     </div>
@@ -76,12 +78,15 @@ function Login() {
   ]
   const handleTabChange = (key: string) => {
     setTabType(key)
+    setManagerInfo({
+      account: "",
+      password: ""
+    })
   }
   return (
     <div className={styles["bg-container"]}>
       <div className={styles.container}>
         <Tabs
-          defaultActiveKey="1"
           items={items}
           centered
           activeKey={tabType}
@@ -93,7 +98,7 @@ function Login() {
           type="primary"
           onClick={Login}
         >
-          登录
+          {tabType === "login" ? "登录" : "注册"}
         </Button>
       </div>
     </div>

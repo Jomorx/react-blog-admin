@@ -22,7 +22,6 @@ const TagContent = (form: FormInstance, item: FormItem) => {
                 onClick={() => {
                   setSelected([...selected, item.tagId])
                   setValue([...value, item])
-                  form.setFieldValue("tags", [...value, item])
                 }}
               >
                 {item.tagName}
@@ -48,6 +47,9 @@ const TagContent = (form: FormInstance, item: FormItem) => {
       item.initialValue ? item.initialValue.map((item: ITag) => item.tagId) : []
     )
   }, [item.initialValue])
+  useEffect(()=>{
+    form.setFieldValue("tags", value)
+  },[value])
   return (
     <>
       {value?.map((item) => {

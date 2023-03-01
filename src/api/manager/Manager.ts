@@ -6,8 +6,8 @@ export const getLoginInfo = ({
   password
 }: ILoginDto): Promise<ReturnType<ILoginApi>> =>
   request.post("/manager/getManagerInfo", { account, password })
-  export const registerManager   = ({
-    account,
-    password
-  }: ILoginDto): Promise<ReturnType<ILoginApi>> =>
-    request.post("/manager/registerManager", { account, password })
+export const registerManager = ({
+  account,
+  password
+}: ILoginDto): Promise<ReturnType<ILoginApi>> =>
+  request.post("/manager/registerManager", { account, password })

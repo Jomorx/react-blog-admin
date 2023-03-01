@@ -12,7 +12,7 @@ import {
   updateArticleApi,
   uploadArticleApi
 } from "@/api/article/ArticleApi"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { IArticle } from "@/api/article"
 import { uploadImageUtil } from "@/utils/upload"
 
@@ -21,6 +21,7 @@ const ArticlePublish = () => {
   const [text, setText] = useState("")
   const [visible, setVisible] = useState<boolean>(false)
   const [initValue, setInitValue] = useState<IArticle>()
+  const navigate = useNavigate()
   const param = useParams()
   const modalInfo: ModalInfoType = {
     onCreate: async (value) => {
@@ -39,6 +40,7 @@ const ArticlePublish = () => {
         })
       }
       setVisible(false)
+      navigate("/article/article-list")
     },
     onCancel: () => {
       setVisible(false)

@@ -3,7 +3,7 @@ export type ILoginApi = {
   nickname: string
   token: string
 }
-export type ILoginDto ={
+export type ILoginDto = {
   account: string
-  password:string
+  password: string
 }
