@@ -1,5 +1,5 @@
 import { FormInstance } from "antd"
-import { ReactNode } from "react"
+import { FunctionComponent, ReactElement, ReactNode } from "react"
 
 export interface FormItem {
   name: string
@@ -15,7 +15,7 @@ export interface FormItem {
     required: boolean
     message?: string
   }[]
-  popoverItem?: (form: FormInstance, item: any) => ReactNode
+  popoverItem?: "tagContent"|"categoryContent"
   initialValue?: any
   valuePropName?: string
   getValueFromEvent?: (...args: any) => any

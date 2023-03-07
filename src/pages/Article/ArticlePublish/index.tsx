@@ -5,8 +5,8 @@ import PageHeader from "@/component/PageHeader"
 import style from "./index.module.less"
 import ModalForm from "@/component/ModalForm"
 import { ModalInfoType } from "@/component/ModalForm/types"
-import categoryContent from "@/component/CategoryContent"
-import tagContent from "@/component/TagContent"
+import CategoryContent from "@/component/CategoryContent"
+import TagContent from "@/component/TagContent"
 import {
   getArticleByIdApi,
   updateArticleApi,
@@ -21,7 +21,6 @@ const ArticlePublish = () => {
   const [text, setText] = useState("")
   const [visible, setVisible] = useState<boolean>(false)
   const [initValue, setInitValue] = useState<IArticle>()
-  const navigate = useNavigate()
   const param = useParams()
   const modalInfo: ModalInfoType = {
     onCreate: async (value) => {
@@ -40,7 +39,8 @@ const ArticlePublish = () => {
         })
       }
       setVisible(false)
-      navigate("/article/article-list")
+      init()
+      // navigate("/article/article-list")
     },
     onCancel: () => {
       setVisible(false)
@@ -56,7 +56,7 @@ const ArticlePublish = () => {
             message: "请输入文章分类"
           }
         ],
-        popoverItem: categoryContent,
+        popoverItem: "categoryContent",
         initialValue: initValue?.category
       },
       {
@@ -69,7 +69,7 @@ const ArticlePublish = () => {
             message: "请输入标签"
           }
         ],
-        popoverItem: tagContent,
+        popoverItem: "tagContent",
         initialValue: initValue?.tagList
       },
       {

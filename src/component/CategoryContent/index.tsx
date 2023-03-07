@@ -5,7 +5,10 @@ import React, { useEffect, useState } from "react"
 import { ICategory } from "@/api/category"
 import styles from "./categoryContent.module.less"
 import { FormInstance } from "antd/lib/form/Form"
-const CategoryContent = (form: FormInstance, item: FormItem) => {
+const CategoryContent: React.FC<{ form: FormInstance; item: FormItem }> = ({
+  form,
+  item
+}) => {
   const [data, setData] = useState<ICategory[]>([])
   const [value, setValue] = useState<ICategory>()
   const content = () => {

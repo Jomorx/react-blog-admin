@@ -2,6 +2,9 @@ import { Form, Input, Modal, Switch } from "antd"
 import { FormInstance } from "antd/lib/form/Form"
 import React from "react"
 import { ColorSelector } from "../ColorSelector"
+import TagContent from "../TagContent"
+import CategoryContent from "../CategoryContent"
+
 import UploadImg from "../UploadImg"
 import { FormItem, ModalInfoType } from "./types"
 interface IProps {
@@ -20,7 +23,13 @@ const switchRender = (type: string, item: FormItem, form: FormInstance) => {
       return <UploadImg item={item} form={form} />
     }
     case "ButtonWithPopover": {
-      return item.popoverItem?.(form, item)
+      // return item.popoverItem?.(form, item)
+      const { popoverItem } = item
+      if (popoverItem === "tagContent")
+        return <TagContent item={item} form={form}></TagContent>
+        if (popoverItem === "categoryContent")
+        return <CategoryContent item={item} form={form}></CategoryContent>
+      else return
     }
     case "switch": {
       return <Switch />
